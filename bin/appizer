@@ -1,0 +1,18 @@
+#!/usr/bin/env ruby
+require 'pathname'
+
+source_path = (Pathname.new(__FILE__).dirname + '../lib').expand_path
+$LOAD_PATH << source_path
+
+require 'appizer'
+
+if ['-v', '--version'].include? ARGV[0]
+  puts Appizer::VERSION
+  exit 0
+end
+
+templates_root = File.expand_path(File.join("..", "templates"), File.dirname(__FILE__))
+Appizer::AppGenerator.source_root templates_root
+Appizer::AppGenerator.source_paths << templates_root << Rails::Generators::AppGenerator.source_root
+
+Appizer::AppGenerator.start
