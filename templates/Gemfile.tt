@@ -8,7 +8,7 @@ gem 'rake', '~> 10.4'
 gem 'pg', '~> 0.15'
 # Use SCSS for stylesheets
 gem 'sassc-rails', github: 'sass/sassc-rails'
-gem 'sprockets-derailleur', github: 'PatLeb/sprockets-derailleur'
+gem 'sprockets-derailleur', github: 'patleb/sprockets-derailleur'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
@@ -58,7 +58,7 @@ gem 'whenever', require: false
 # gem 'que'
 
 # Database
-gem 'yaml_db', github: 'PatLeb/yaml_db'
+gem 'yaml_db', github: 'patleb/yaml_db'
 # gem 'goldiloader'
 # gem 'paranoia', '~> 2.0'
 
@@ -92,8 +92,8 @@ gem 'lazyload-rails', github: 'jassa/lazyload-rails'
 gem 'browser', github: 'fnando/browser'
 
 # Rails Admin
-gem 'rails_admin_cms', github: 'PatLeb/rails_admin_cms', branch: 'master'
-gem 'rich', github: 'PatLeb/rich', branch: 'master'
-gem 'rails_admin', github: 'PatLeb/rails_admin', branch: 'master'
-gem 'rails_admin_jcrop', github: 'PatLeb/rails_admin_jcrop', branch: 'feature/one_crop_per_page'
-gem 'rails_admin_globalize_field', github: 'PatLeb/rails_admin_globalize_field', branch: 'master'
+gem 'rails_admin_cms', github: 'patleb/rails_admin_cms', branch: 'master'
+gem 'rich', github: 'patleb/rich', branch: 'master'
+gem 'rails_admin', github: 'patleb/rails_admin', branch: 'master'
+gem 'rails_admin_jcrop', github: 'patleb/rails_admin_jcrop', branch: 'feature/one_crop_per_page'
+gem 'rails_admin_globalize_field', github: 'patleb/rails_admin_globalize_field', branch: 'master'

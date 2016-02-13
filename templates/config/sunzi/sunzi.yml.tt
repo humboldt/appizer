@@ -3,32 +3,33 @@
 attributes:
   timezone: America/New_York
   locales: en_US en_US.UTF-8
+  # swap_size: 1024M
 
 # Remote files here will be downloaded to compiled/files.
 files:
-  - https://raw.githubusercontent.com/PatLeb/sunzi-recipes/master/files/authorized_keys
-  - https://raw.githubusercontent.com/PatLeb/sunzi-recipes/master/files/nginx_logs
-  - https://raw.githubusercontent.com/PatLeb/sunzi-recipes/master/files/rails_logs
-  - https://raw.githubusercontent.com/PatLeb/sunzi-recipes/master/files/sudoers
+  - https://raw.githubusercontent.com/patleb/sunzi-recipes/master/files/authorized_keys
+  - https://raw.githubusercontent.com/patleb/sunzi-recipes/master/files/nginx_logs
+  - https://raw.githubusercontent.com/patleb/sunzi-recipes/master/files/rails_logs
+  - https://raw.githubusercontent.com/patleb/sunzi-recipes/master/files/sudoers
 
 # Remote recipes here will be downloaded to compiled/recipes.
 recipes:
-  - https://raw.githubusercontent.com/PatLeb/sunzi-recipes/master/recipes/analysers.sh
-  - https://raw.githubusercontent.com/PatLeb/sunzi-recipes/master/recipes/libraries.sh
-  - https://raw.githubusercontent.com/PatLeb/sunzi-recipes/master/recipes/logrotate.sh
-  - https://raw.githubusercontent.com/PatLeb/sunzi-recipes/master/recipes/monit.sh
-  - https://raw.githubusercontent.com/PatLeb/sunzi-recipes/master/recipes/mysql.sh
-  - https://raw.githubusercontent.com/PatLeb/sunzi-recipes/master/recipes/noatime.sh
-  - https://raw.githubusercontent.com/PatLeb/sunzi-recipes/master/recipes/nodejs.sh
-  - https://raw.githubusercontent.com/PatLeb/sunzi-recipes/master/recipes/passenger_nginx.sh
-  - https://raw.githubusercontent.com/PatLeb/sunzi-recipes/master/recipes/postgres.sh
-  - https://raw.githubusercontent.com/PatLeb/sunzi-recipes/master/recipes/ruby.sh
-  - https://raw.githubusercontent.com/PatLeb/sunzi-recipes/master/recipes/user.sh
+  - https://raw.githubusercontent.com/patleb/sunzi-recipes/master/recipes/analysers.sh
+  - https://raw.githubusercontent.com/patleb/sunzi-recipes/master/recipes/libraries.sh
+  - https://raw.githubusercontent.com/patleb/sunzi-recipes/master/recipes/logrotate.sh
+  - https://raw.githubusercontent.com/patleb/sunzi-recipes/master/recipes/monit.sh
+  - https://raw.githubusercontent.com/patleb/sunzi-recipes/master/recipes/noatime.sh
+  - https://raw.githubusercontent.com/patleb/sunzi-recipes/master/recipes/nodejs.sh
+  - https://raw.githubusercontent.com/patleb/sunzi-recipes/master/recipes/passenger_nginx.sh
+  - https://raw.githubusercontent.com/patleb/sunzi-recipes/master/recipes/postgres.sh
+  - https://raw.githubusercontent.com/patleb/sunzi-recipes/master/recipes/ruby.sh
+  - https://raw.githubusercontent.com/patleb/sunzi-recipes/master/recipes/swap.sh
+  - https://raw.githubusercontent.com/patleb/sunzi-recipes/master/recipes/user.sh
 
 # Remote roles here will be downloaded to compiled/roles.
 roles:
-  - https://raw.githubusercontent.com/PatLeb/sunzi-recipes/master/roles/admin.sh
-  - https://raw.githubusercontent.com/PatLeb/sunzi-recipes/master/roles/deployer.sh
+  - https://raw.githubusercontent.com/patleb/sunzi-recipes/master/roles/admin.sh
+  - https://raw.githubusercontent.com/patleb/sunzi-recipes/master/roles/deployer.sh
 
 # Files specified here will be copied to compiled/files.
 # locals:
