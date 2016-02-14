@@ -28,6 +28,9 @@ module Appizer
     class_option :ruby_version, type: :string, default: '2.2.3',
       desc: 'Set Ruby version used'
 
+    class_option :git_ssl_verify, type: :boolean, default: false,
+      desc: 'Verify Git server SSL Certificate (might be problematic for self-signed certificate)'
+
     protected
 
     def get_builder_class

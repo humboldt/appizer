@@ -119,6 +119,7 @@ module Appizer
           git checkout: "-b 'staging'"
           git checkout: "-b 'vagrant'"
           git checkout: "-b 'develop'"
+          git config: "http.sslVerify '#{options.git_ssl_verify}'"
         end
       end
     end
