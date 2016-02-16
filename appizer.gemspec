@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.name          = "appizer"
   spec.version       = Appizer::VERSION
   spec.authors       = ["Patrice Lebel"]
-  spec.email         = ["git@patleb.com"]
+  spec.email         = ["patleb@users.noreply.github.com"]
 
   spec.summary       = "Project Boilerplate Builder"
   spec.description   = "Project Boilerplate Builder"
