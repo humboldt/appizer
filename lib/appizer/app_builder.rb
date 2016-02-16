@@ -107,11 +107,13 @@ module Appizer
       after_bundle do
         db_directory
 
-        if options.migrate?
-          rake 'db:drop' if options.drop?
-          rake 'db:create'
-          rake 'db:migrate'
-        end
+        rake 'db:drop' if options.drop?
+        rake 'db:create'
+        configure_devise
+        rake 'db:migrate'
+        rake 'db:seed'
+        rake 'db:data:dump'
+
         unless options.skip_git?
           git :init
           git add: '.'
@@ -131,6 +133,8 @@ module Appizer
       rake 'railties:install:migrations'
       copy_file 'db/migrate/001_add_mail_interceptors_to_settings.rb',
         "db/migrate/#{next_timestamp}_add_mail_interceptors_to_settings.rb"
+      copy_file 'db/migrate/002_devise_create_users.rb',
+        "db/migrate/#{next_timestamp}_devise_create_users.rb"
     end
 
     def next_timestamp
@@ -227,8 +231,21 @@ module Appizer
       CONFIG
       gsub_file "#{name}.rb", /# config.action_dispatch.+NGINX/,
         "config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for NGINX"
-      gsub_file "#{name}.rb", /config.log_level = :debug/,
+      gsub_file "#{name}.rb", 'config.log_level = :debug',
         "config.log_level = :#{level}"
+    end
+
+    def configure_devise
+      invoke('devise:install')
+
+      { '# config.http_authenticatable = false'       => 'config.http_authenticatable = true',
+        'config.stretches = Rails.env.test? ? 1 : 10' => 'config.stretches = 20',
+        /# config.pepper = '.+'/                      => 'config.pepper = Rails.configuration.secret_token',
+        '# config.encryptor = :sha512'                => 'config.encryptor = :authlogic_sha512',
+        'config.sign_out_via = :delete'               => 'config.sign_out_via = :get'
+      }.each do |old, new|
+        gsub_file 'config/initializers/devise.rb', old, new
+      end
     end
   end
 end

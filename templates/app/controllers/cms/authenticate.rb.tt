@@ -5,17 +5,8 @@ module CMS
     included do
       http_basic_authenticate_with name: '<%= app_name %>', password: '<%= SecureRandom.hex %>' if Rails.env.staging?
 
+      alias_method :current_user?, :user_signed_in?
       helper_method :current_user, :current_user?, :current_admin, :current_admin?
-    end
-
-    def current_user
-      # TODO: override or rewrite
-      @current_user ||= Struct.new(:admin?).new(true)
-    end
-
-    def current_user?
-      return @is_current_user if defined? @is_current_user
-      @is_current_user = !!current_user
     end
 
     def current_admin
@@ -23,8 +14,7 @@ module CMS
     end
 
     def current_admin?
-      return @is_current_admin if defined? @is_current_admin
-      @is_current_admin = !!current_user.try(:admin?)
+      current_user.try(:admin?)
     end
 
     def authenticate_admin_user!

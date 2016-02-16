@@ -74,14 +74,12 @@ gem 'yaml_db', github: 'patleb/yaml_db'
 # Views
 gem 'nestive', '~> 0.5'
 # gem 'local_time'
+# gem 'kaminari'
+# gem 'kaminari-i18n'
 
 # Forms
 # gem 'cocoon'
 # gem 'best_in_place', github: 'bernat/best_in_place'
-
-# Tables
-# gem 'wice_grid', github: 'leikind/wice_grid', branch: 'rails3'
-# gem 'spreadsheet'
 
 # CSS
 gem 'autoprefixer-rails'
@@ -97,3 +95,9 @@ gem 'rich', github: 'patleb/rich', branch: 'master'
 gem 'rails_admin', github: 'patleb/rails_admin', branch: 'master'
 gem 'rails_admin_jcrop', github: 'patleb/rails_admin_jcrop', branch: 'feature/one_crop_per_page'
 gem 'rails_admin_globalize_field', github: 'patleb/rails_admin_globalize_field', branch: 'master'
+
+# Auth
+gem 'devise'
+gem 'devise-encryptable'
+gem 'devise-i18n'
+gem 'devise-i18n-views'

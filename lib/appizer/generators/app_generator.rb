@@ -19,9 +19,6 @@ module Appizer
     class_option :locales, type: :array, default: ['fr', 'en'],
       desc: "Available locales (default locale comes first)"
 
-    class_option :migrate, type: :boolean, default: true,
-      desc: 'Run migrations'
-
     class_option :drop, type: :boolean, default: false,
       desc: 'Drop current table before migration'
 
