@@ -14,7 +14,7 @@ RailsAdmin.config do |config|
   config.current_user_method(&:current_admin)
 
   config.authorize_with do
-    redirect_to '/' unless current_admin?
+    redirect_to main_app.new_user_session_path unless current_admin?
   end
 
   ## == Cancan ==
@@ -24,7 +24,7 @@ RailsAdmin.config do |config|
   # config.authorize_with :pundit
 
   ## == PaperTrail ==
-  config.audit_with :paper_trail, 'BlackHole', 'PaperTrail::Version'
+  config.audit_with :paper_trail, 'User', 'PaperTrail::Version'
 
   ### More at https://github.com/sferik/rails_admin/wiki/Base-configuration
 
