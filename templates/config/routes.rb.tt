@@ -2,6 +2,9 @@ Rails.application.routes.draw do
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: "/letter_opener"
   end
+
+  devise_for :users
+
   mount Rich::Engine => 'rich', as: 'rich'
   mount RailsAdmin::Engine => 'admin', as: 'rails_admin'
 
