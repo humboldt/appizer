@@ -14,8 +14,14 @@ RailsAdmin.config do |config|
   config.current_user_method(&:current_admin)
 
   config.authorize_with do
-    session[:referer] = request.url
-    redirect_to main_app.new_user_session_path unless current_admin?
+    if current_user?
+      if !current_admin?
+        redirect_to main_app.root_path
+      end
+    else
+      session[:referer] = request.url
+      redirect_to main_app.new_user_session_path
+    end
   end
 
   ## == Cancan ==
