@@ -14,6 +14,7 @@ RailsAdmin.config do |config|
   config.current_user_method(&:current_admin)
 
   config.authorize_with do
+    session[:referer] = request.url
     redirect_to main_app.new_user_session_path unless current_admin?
   end
 
