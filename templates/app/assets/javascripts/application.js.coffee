@@ -14,9 +14,9 @@
 #= require jquery_ujs
 #= require jquery.turbolinks
 #= require jquery.lazyload
+#= require bootstrap-sprockets
 #= require nprogress
 #= require nprogress-turbolinks
-#= require modernizr.custom
 
 #= require rails_admin_cms/all
 

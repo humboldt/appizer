@@ -12,8 +12,10 @@
  *
  */
 
-@import "font-awesome-sprockets";
-@import "font-awesome";
+@import "bootstrap-sprockets";
+@import "bootswatch/paper/variables";
+@import "bootstrap";
+@import "bootswatch/paper/bootswatch";
 @import "nprogress-variables";
 @import "nprogress";
 
