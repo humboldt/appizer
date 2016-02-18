@@ -48,7 +48,7 @@ module Appizer
         directory 'initializers_tt', 'initializers'
         directory 'locales'
         inside    'locales' do
-          options.locales.reject{ |l| l == 'en' }.each do |locale|
+          other_locales_each do |locale|
             duplicate_locale locale
             duplicate_locale locale, 'routes'
             gsub_file "routes.#{locale}.yml", /page: page/, "page: #{locale}/page"
@@ -142,13 +142,6 @@ module Appizer
 
       Dir['db/migrate/*.rb'].sort.last =~ /(\d{14})_/
       @next_timestamp = $1.to_i + 1
-    end
-
-    def duplicate_locale(locale, name = nil)
-      src_name = name ? "#{name}.en.yml" : "en.yml"
-      dst_name = name ? "#{name}.#{locale}.yml" : "#{locale}.yml"
-      copy_file src_name, dst_name
-      gsub_file dst_name, /^en/, locale
     end
 
     def configure_application
@@ -245,6 +238,24 @@ module Appizer
         'config.sign_out_via = :delete'               => 'config.sign_out_via = :get'
       }.each do |old, new|
         gsub_file 'config/initializers/devise.rb', old, new
+      end
+
+      copy_file 'config/locales/devise.en.yml'
+      other_locales_each do |locale|
+        duplicate_locale locale, 'devise'
+      end
+    end
+
+    def duplicate_locale(locale, name = nil)
+      src_name = name ? "#{name}.en.yml" : "en.yml"
+      dst_name = name ? "#{name}.#{locale}.yml" : "#{locale}.yml"
+      copy_file src_name, dst_name
+      gsub_file dst_name, /^en/, locale
+    end
+
+    def other_locales_each
+      options.locales.reject{ |l| l == 'en' }.each do |locale|
+        yield locale
       end
     end
   end
