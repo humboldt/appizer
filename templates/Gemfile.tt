@@ -43,8 +43,6 @@ group :development, :test do
   # gem 'web-console', '~> 3.0'
   gem 'xray-rails', github: 'brentd/xray-rails'
   gem 'quiet_assets'
-  gem 'coffee-rails-source-paths', github: 'Machiaweliczny/coffee-rails-source-paths'
-  gem 'sass-rails-source-maps', github: 'inopinatus/sass-rails-source-maps'
   gem 'letter_opener'
   gem 'letter_opener_web', '~> 1.2.0'
 end
