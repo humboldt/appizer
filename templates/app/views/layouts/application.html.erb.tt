@@ -17,19 +17,18 @@
   <!--[if lt IE 9]>
   <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6/html5shiv.min.js"></script>
   <![endif]-->
-  <%%= area :head %>
 </head>
 <body class="<%%= cms_body_class %>">
+  <header>
+    <%%= render 'layouts/shared/header' %>
+  </header>
 
-<%%= cms_flash_messages %>
-<div>
-  <%%= cms_locale_selector %>
-</div>
-<div>
-  <%%= cms_link_to_edit_mode if current_admin? %>
-</div>
+  <main class="container-fluid">
+    <%%= yield %>
+  </main>
 
-<%%= yield %>
-
+  <footer>
+    <%%= render 'layouts/shared/footer' %>
+  </footer>
 </body>
 </html>
