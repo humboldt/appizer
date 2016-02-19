@@ -102,6 +102,7 @@ module Appizer
     def leftovers
       template '.ruby-version'
       copy_file 'Capfile'
+      copy_file 'Guardfile'
       template  'Vagrantfile'
 
       after_bundle do
@@ -182,12 +183,15 @@ module Appizer
       environment(<<-DEV.strip_heredoc.indent(2), env: 'development')
 
         config.middleware.insert 0, Middleware::TurboDev
+        config.middleware.insert_after(ActionDispatch::Static, Rack::LiveReload) # guard -P livereload
 
         config.action_controller.asset_host = 'http://localhost:3000'
         config.action_mailer.asset_host = 'http://localhost:3000'
         config.action_mailer.delivery_method = :letter_opener_web
         config.action_mailer.default_url_options = { :host => "localhost:3000" }
       DEV
+
+      gsub_file 'development.rb', 'config.assets.debug = true', 'config.assets.debug = false'
     end
 
     def configure_production
