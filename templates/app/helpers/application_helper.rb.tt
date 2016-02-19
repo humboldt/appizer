@@ -1,2 +1,9 @@
 module ApplicationHelper
+  def icon(name, options = {})
+    content_tag(:i, '', class: "glyphicon glyphicon-#{name} #{options[:class]}")
+  end
+
+  def hint(text)
+    content_tag(:i, "(#{text})")
+  end
 end
