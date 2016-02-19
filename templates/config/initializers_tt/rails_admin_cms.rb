@@ -16,7 +16,7 @@ RailsAdminCMS.config do |config|
   # config.with_email_body = false
 
   # Defines if there is the current locale in the locale selector
-  # config.hide_current_locale = false
+  config.hide_current_locale = false
 
   # Defines iframe permissions: same host, different host or all
   # config.allow_iframe_from = 'SAMEORIGIN'
