@@ -5,3 +5,8 @@ en:
     formats:
       day_and_date: "%A %m/%d/%Y"
       admin_datetime: "%Y-%m-%d %H:%M:%S"
+  cms:
+    add: ''
+    edit: ''
+    show_mode: ''
+    edit_mode: ''
