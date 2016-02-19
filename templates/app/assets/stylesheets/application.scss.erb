@@ -12,11 +12,22 @@
  *
  */
 
+@import "variables";
+@import "mixins";
+
 @import "bootstrap-sprockets";
 @import "bootswatch/paper/variables";
 @import "bootstrap";
 @import "bootswatch/paper/bootswatch";
-@import "nprogress-variables";
 @import "nprogress";
 
-@import "rails_admin_cms/all";
+@import "theming";
+
+<% if Rails.env.development? %>
+@import "xray.css";
+
+// use in development when the css needs to be recompiled
+html.recompile {
+  version: 1;
+}
+<% end %>

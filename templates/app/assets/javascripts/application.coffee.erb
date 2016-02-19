@@ -1,0 +1,18 @@
+<%
+require_asset 'jquery'
+require_asset 'jquery_ujs'
+require_asset 'jquery.turbolinks'
+require_asset 'jquery.lazyload'
+require_asset 'bootstrap-sprockets'
+require_asset 'nprogress'
+require_asset 'nprogress-turbolinks'
+
+require_asset 'rails_admin_cms/all'
+require_asset 'ui'
+
+require_asset 'turbolinks'
+
+require_asset 'xray' if Rails.env.development?
+%>
+
+UI.start()
