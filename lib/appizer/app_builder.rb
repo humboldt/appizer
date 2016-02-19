@@ -87,16 +87,7 @@ module Appizer
     end
 
     def vendor
-      empty_directory 'vendor/assets'
-
-      inside 'vendor/assets' do
-        copy_file 'javascripts/jquery.lazyload.js'
-        copy_file 'javascripts/modernizr.custom.js'
-        directory 'javascripts/rails_admin'
-        copy_file 'stylesheets/nprogress-variables.scss'
-        directory 'stylesheets/rails_admin'
-        directory 'stylesheets/rich'
-      end
+      directory 'vendor/assets'
     end
 
     def leftovers
