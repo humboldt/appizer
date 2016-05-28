@@ -183,6 +183,7 @@ module Appizer
       DEV
 
       gsub_file 'development.rb', 'config.assets.debug = true', 'config.assets.debug = false'
+      gsub_file 'development.rb', 'config.assets.digest = true', 'config.assets.digest = false'
     end
 
     def configure_production
