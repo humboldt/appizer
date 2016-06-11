@@ -99,12 +99,12 @@ module Appizer
       after_bundle do
         db_directory
 
-        rake 'db:drop' if options.drop?
-        rake 'db:create'
+        run 'bundle exec rake db:drop' if options.drop?
+        run 'bundle exec rake db:create'
         configure_devise
-        rake 'db:migrate'
-        rake 'db:seed'
-        rake 'db:data:dump'
+        run 'bundle exec rake db:migrate'
+        run 'bundle exec rake db:seed'
+        run 'bundle exec rake db:data:dump'
 
         unless options.skip_git?
           git :init
@@ -122,7 +122,7 @@ module Appizer
 
     def db_directory
       copy_file 'db/seeds.rb'
-      rake 'railties:install:migrations'
+      run 'bundle exec rake railties:install:migrations'
       copy_file 'db/migrate/001_add_mail_interceptors_to_settings.rb',
         "db/migrate/#{next_timestamp}_add_mail_interceptors_to_settings.rb"
       copy_file 'db/migrate/002_devise_create_users.rb',
