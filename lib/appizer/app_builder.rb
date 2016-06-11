@@ -48,6 +48,7 @@ module Appizer
         directory 'initializers_tt', 'initializers'
         directory 'locales'
         inside    'locales' do
+          remove_file 'devise.en.yml'
           other_locales_each do |locale|
             duplicate_locale locale
             duplicate_locale locale, 'routes'
@@ -102,7 +103,7 @@ module Appizer
         run 'bundle exec rake db:drop' if options.drop?
         run 'bundle exec rake db:create'
         configure_devise
-        run 'bundle exec rake db:migrate'
+        run 'bundle exec rake db:migrate' #TODO: Multiple migrations have the name CreateRichRichImages
         run 'bundle exec rake db:seed'
         run 'bundle exec rake db:data:dump'
 
@@ -225,7 +226,7 @@ module Appizer
     end
 
     def configure_devise
-      invoke('devise:install')
+      invoke('devise:install', [], orm: :active_record)
 
       { '# config.http_authenticatable = false'       => 'config.http_authenticatable = true',
         'config.stretches = Rails.env.test? ? 1 : 10' => 'config.stretches = 20',
@@ -236,9 +237,11 @@ module Appizer
         gsub_file 'config/initializers/devise.rb', old, new
       end
 
-      copy_file 'config/locales/devise.en.yml'
-      other_locales_each do |locale|
-        duplicate_locale locale, 'devise'
+      inside 'config/locales' do
+        copy_file 'devise.en.yml'
+        other_locales_each do |locale|
+          duplicate_locale locale, 'devise'
+        end
       end
     end
 
