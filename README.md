@@ -33,6 +33,9 @@ After `vagrant up`, connect with `vagrant ssh` and add your public ssh key `id_r
 * Rack-attack + Log rotate
 * Rspec
 * Redis + Que
+*. icon or simple text for submit buttons
+*. overflow: auto; on secondary-menu
+*. search form authenticity_token cached, so use GET method
 
 ## Contributing
 
