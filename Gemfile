@@ -2,8 +2,8 @@ source 'https://rubygems.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', github: 'rails/rails', branch: '4-2-stable'
-gem 'rake', '~> 10.4'
+gem 'rails', github: 'rails/rails', tag: 'v5.0.0.rc2'
+gem 'rake'
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 0.15'
 # Use SCSS for stylesheets
@@ -42,7 +42,6 @@ group :development, :test do
 
   # gem 'web-console', '~> 3.0'
   gem 'xray-rails', github: 'brentd/xray-rails'
-  gem 'quiet_assets'
   gem 'letter_opener'
   gem 'letter_opener_web', '~> 1.2.0'
 
@@ -50,6 +49,17 @@ group :development, :test do
   gem 'guard-livereload',  require: false
   gem 'rack-livereload'
   gem 'rb-fsevent',        require: false
+end
+
+group :test do
+  gem 'rspec-rails'
+  gem 'capybara'
+  gem 'factory_girl_rails'
+  gem 'poltergeist'
+  gem 'database_cleaner'
+  gem 'faker'
+  gem 'shoulda-matchers'
+  gem 'spring-commands-rspec'
 end
 
 group :staging, :vagrant do
@@ -96,10 +106,15 @@ gem 'browser', github: 'fnando/browser'
 # Rails Admin
 # gem 'nicer', github: 'patleb/nicer', branch: 'master'
 gem 'nicer', path: '/home/plebel/Desktop/patleb/nicer'
-gem 'rich', github: 'patleb/rich', branch: 'master'
+gem 'rich', path: '/home/plebel/Desktop/patleb/rich'
 gem 'rails_admin', github: 'patleb/rails_admin', branch: 'master'
 gem 'rails_admin_jcrop', github: 'patleb/rails_admin_jcrop', branch: 'feature/one_crop_per_page'
-gem 'rails_admin_globalize_field', github: 'patleb/rails_admin_globalize_field', branch: 'master'
+# gem 'rails_admin_globalize_field', github: 'patleb/rails_admin_globalize_field', branch: 'master'
+gem 'rails_admin_history_rollback', github: 'musterdenker/rails_admin_history_rollback', branch: 'rails5'
+gem 'rails-i18n', github: 'svenfuchs/rails-i18n'
+# gem 'globalize', github: 'globalize/globalize', branch: 'fix_type_cast_from_database'
+gem 'remotipart', github: 'mshibuya/remotipart', ref: '3a6acb3'
+gem 'route_translator', github: 'enriclluelles/route_translator', branch: 'feature/rails5'
 
 # Auth
 gem 'devise'
