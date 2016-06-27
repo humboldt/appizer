@@ -3,13 +3,13 @@ source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '>= 5.0.0.rc2', '< 5.1'
+gem 'record_tag_helper', '~> 1.0'
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 0.15'
-# Use Puma as the app server
-# gem 'puma', '~> 3.0'
 # Use SCSS for stylesheets
-gem 'sassc-rails', github: 'sass/sassc-rails'
+gem 'sassc-rails' #, github: 'schneems/sassc-rails', branch: 'schneems/sprockets4'
 gem 'sprockets-derailleur', github: 'patleb/sprockets-derailleur'
+gem 'sprockets', '~> 3.6.2' #github: 'rails/sprockets', branch: 'master'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
@@ -21,7 +21,7 @@ gem 'coffee-rails', '~> 4.1.0'
 gem 'jquery-rails'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 gem 'turbolinks', '~> 5.x'
-gem 'nprogress-rails', github: 'caarlos0/nprogress-rails'
+gem 'nprogress-rails', github: 'VictorBersy/nprogress-rails', branch: 'add-turbolinks-5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
@@ -33,6 +33,9 @@ gem 'jbuilder', '~> 2.5'
 # gem 'capistrano-rails', group: :development
 
 group :development, :test do
+  # Use Puma as the app server
+  gem 'puma', '~> 3.0'
+
   gem 'capistrano', '~> 3.1'
   gem 'capistrano-bundler', '~> 1.1'
   gem 'capistrano-rails', '~> 1.1'
@@ -45,7 +48,7 @@ group :development, :test do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
   gem 'web-console'
   gem 'listen', '~> 3.0.5'
-  gem 'xray-rails', github: 'brentd/xray-rails'
+  gem 'xray-rails', github: 'patleb/xray-rails'
   gem 'letter_opener'
   gem 'letter_opener_web', '~> 1.2.0'
 
@@ -123,6 +126,7 @@ gem 'rails-i18n', github: 'svenfuchs/rails-i18n'
 # gem 'globalize', github: 'globalize/globalize', branch: 'fix_type_cast_from_database'
 gem 'remotipart', github: 'mshibuya/remotipart', ref: '3a6acb3'
 gem 'route_translator', github: 'enriclluelles/route_translator', branch: 'feature/rails5'
+gem 'active_type', github: 'patleb/active_type'
 
 # Auth
 gem 'devise'

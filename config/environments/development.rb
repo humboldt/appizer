@@ -2,7 +2,7 @@ Rails.application.configure do
 
   config.middleware.insert 0, Middleware::TurboDev
   config.middleware.insert_after(ActionDispatch::Static, RackWithQuietAssets)
-  config.middleware.insert_after(ActionDispatch::Static, Rack::LiveReload) # guard -P livereload
+  config.middleware.insert_after(ActionDispatch::Static, Rack::LiveReload) # bundle exec guard -P livereload
 
   config.action_controller.asset_host = 'http://localhost:3000'
   config.action_mailer.asset_host = 'http://localhost:3000'

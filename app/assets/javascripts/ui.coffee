@@ -1,7 +1,7 @@
 class UI extends Nice.UI
   @start: =>
     super
-    @ready =>
+    @Scope.ready =>
       'todo'
 
 window.UI = UI
