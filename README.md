@@ -1,5 +1,7 @@
 # Appizer
 
+TODO: redirect_to :back --> http://blog.bigbinary.com/2016/02/29/rails-5-improves-redirect_to_back-with-redirect-back.html
+
 TODO: Delete this and describe your gem
 
 ## Installation

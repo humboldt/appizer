@@ -6,6 +6,15 @@ GIT
     nprogress-rails (0.1.6.7)
 
 GIT
+  remote: git://github.com/amatsuda/kaminari.git
+  revision: abbf93d557208ee1d0b612c612cd079f86ed54f4
+  branch: 0-17-stable
+  specs:
+    kaminari (0.17.0)
+      actionpack (>= 3.0.0)
+      activesupport (>= 3.0.0)
+
+GIT
   remote: git://github.com/enriclluelles/route_translator.git
   revision: 9eddd32974c05023af44e378728c56dfbdda30e2
   branch: feature/rails5
@@ -35,21 +44,17 @@ GIT
     remotipart (1.2.1)
 
 GIT
-  remote: git://github.com/musterdenker/rails_admin_history_rollback.git
-  revision: 319f75355129bb3419652349966de1fde0e5b437
-  branch: rails5
-  specs:
-    rails_admin_history_rollback (0.0.7)
-      paper_trail (>= 3.0.6)
-      rails (>= 4.2.0)
-      rails_admin (>= 0.6.6)
-
-GIT
   remote: git://github.com/patleb/active_type.git
   revision: c62835ed4c293d416af87b0e81dda1b63147b4b8
   specs:
     active_type (0.5.1)
       activerecord (>= 3.2)
+
+GIT
+  remote: git://github.com/patleb/devise-i18n-views.git
+  revision: d21c2f3b571341d9f54ab6d23636c3132bb4f041
+  specs:
+    devise-i18n-views (0.3.7)
 
 GIT
   remote: git://github.com/patleb/rails_admin.git
@@ -71,6 +76,15 @@ GIT
       sass-rails (>= 4.0, < 6)
 
 GIT
+  remote: git://github.com/patleb/rails_admin_history_rollback.git
+  revision: 6a3957b4ada3670ea3d5e0984e29ffd53925f412
+  specs:
+    rails_admin_history_rollback (0.0.7)
+      paper_trail (>= 3.0.6)
+      rails (>= 4.2.0)
+      rails_admin (>= 0.6.6)
+
+GIT
   remote: git://github.com/patleb/rails_admin_jcrop.git
   revision: 5db9e12ec8ce52424cbb8a6154b0a80762e5aee3
   branch: feature/one_crop_per_page
@@ -79,6 +93,19 @@ GIT
       mini_magick
       rails (>= 4.0)
       rails_admin (>= 0.6.5)
+
+GIT
+  remote: git://github.com/patleb/rich.git
+  revision: e787d6be3b246786419b9b5e3a8d93cb5ce5b3ef
+  specs:
+    rich (1.4.8)
+      babosa
+      jquery-rails
+      kaminari
+      mime-types
+      rack-raw-upload
+      rails (>= 3.2.0)
+      sass-rails
 
 GIT
   remote: git://github.com/patleb/sprockets-derailleur.git
@@ -112,11 +139,6 @@ GIT
       railties (~> 5.0.0.beta1)
 
 PATH
-  remote: /home/plebel/Desktop/patleb/devise-i18n-views
-  specs:
-    devise-i18n-views (0.3.7)
-
-PATH
   remote: /home/plebel/Desktop/patleb/nicer
   specs:
     nicer (0.0.1)
@@ -134,7 +156,7 @@ PATH
       nestive (~> 0.5)
       paper_trail (~> 4.0.0)
       paperclip (~> 4.2)
-      rails (>= 4.2.0)
+      rails (>= 4.2)
       rails-i18n (>= 4.0.8)
       rails_admin (~> 0.8, >= 0.8.1)
       rails_admin-i18n (~> 0.0, >= 0.0.9)
@@ -144,18 +166,6 @@ PATH
       route_translator (>= 4.2.2)
       simple_form (~> 3.2, >= 3.2.1)
       youtube_addy (~> 1.0, >= 1.0.4)
-
-PATH
-  remote: /home/plebel/Desktop/patleb/rich
-  specs:
-    rich (1.4.8)
-      babosa
-      jquery-rails
-      kaminari
-      mime-types
-      rack-raw-upload
-      rails (>= 3.2.0)
-      sass-rails
 
 GEM
   remote: https://rubygems.org/
@@ -350,9 +360,6 @@ GEM
     jquery-ui-rails (5.0.5)
       railties (>= 3.2.16)
     json (1.8.3)
-    kaminari (0.17.0)
-      actionpack (>= 3.0.0)
-      activesupport (>= 3.0.0)
     launchy (2.4.3)
       addressable (~> 2.3)
     letter_opener (1.4.1)
@@ -578,6 +585,7 @@ DEPENDENCIES
   guard-livereload
   jbuilder (~> 2.5)
   jquery-rails
+  kaminari!
   lazyload-rails!
   letter_opener
   letter_opener_web (~> 1.2.0)
