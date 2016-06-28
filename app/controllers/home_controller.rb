@@ -1,2 +1,2 @@
-class HomeController < Nice::BaseController
+class HomeController < ApplicationController
 end
