@@ -51,12 +51,6 @@ GIT
       activerecord (>= 3.2)
 
 GIT
-  remote: git://github.com/patleb/devise-i18n-views.git
-  revision: d21c2f3b571341d9f54ab6d23636c3132bb4f041
-  specs:
-    devise-i18n-views (0.3.7)
-
-GIT
   remote: git://github.com/patleb/rails_admin.git
   revision: d18d8877c98a2ea55f4a8e63dac92f727de101ee
   branch: master
@@ -146,6 +140,9 @@ PATH
       active_type (~> 0.4, >= 0.4.3)
       bootstrap_flash_messages (~> 1.0, >= 1.0.1)
       country_select (~> 2.5, >= 2.5.1)
+      devise (>= 4.1.1)
+      devise-encryptable (>= 0.2.0)
+      devise-i18n (>= 1.1.0)
       email_validator (~> 1.6, >= 1.6.0)
       gibbon (~> 1.1)
       i18n_country_select (~> 1.1, >= 1.1.5)
@@ -575,10 +572,6 @@ DEPENDENCIES
   capybara
   coffee-rails (~> 4.1.0)
   database_cleaner
-  devise
-  devise-encryptable
-  devise-i18n
-  devise-i18n-views!
   factory_girl_rails
   faker
   guard (>= 2.2.2)

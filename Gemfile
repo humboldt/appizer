@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '>= 5.0.0.rc2', '< 5.1'
+gem 'rails-i18n', github: 'svenfuchs/rails-i18n'
 gem 'record_tag_helper', '~> 1.0'
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 0.15'
@@ -117,20 +118,14 @@ gem 'browser', github: 'fnando/browser'
 # Rails Admin
 # gem 'nicer', github: 'patleb/nicer', branch: 'master'
 gem 'nicer', path: '/home/plebel/Desktop/patleb/nicer'
-gem 'rich', github: 'patleb/rich'
 gem 'rails_admin', github: 'patleb/rails_admin', branch: 'master'
+gem 'rich', github: 'patleb/rich'
 gem 'rails_admin_jcrop', github: 'patleb/rails_admin_jcrop', branch: 'feature/one_crop_per_page'
-# gem 'rails_admin_globalize_field', github: 'patleb/rails_admin_globalize_field', branch: 'master'
 gem 'rails_admin_history_rollback', github: 'patleb/rails_admin_history_rollback'
-gem 'rails-i18n', github: 'svenfuchs/rails-i18n'
+# gem 'rails_admin_globalize_field', github: 'patleb/rails_admin_globalize_field', branch: 'master'
 # gem 'globalize', github: 'globalize/globalize', branch: 'fix_type_cast_from_database'
 gem 'remotipart', github: 'mshibuya/remotipart', ref: '3a6acb3'
+
 gem 'route_translator', github: 'enriclluelles/route_translator', branch: 'feature/rails5'
 gem 'active_type', github: 'patleb/active_type'
 gem 'kaminari', github: 'amatsuda/kaminari', branch: '0-17-stable'
-
-# Auth
-gem 'devise'
-gem 'devise-encryptable'
-gem 'devise-i18n'
-gem 'devise-i18n-views', github: 'patleb/devise-i18n-views'

@@ -21,9 +21,9 @@ Gem::Specification.new do |spec|
   spec.executables   = ["appizer"]
   spec.require_paths = ["lib"]
 
-  spec.add_dependency 'rails', "~> #{Appizer::RAILS_VERSION}", ">= #{Appizer::RAILS_VERSION}.0"
+  spec.add_dependency 'rails', ">= #{Appizer::RAILS_VERSION}"
 
-  spec.add_runtime_dependency 'bundler', '~> 1.3'
+  spec.add_runtime_dependency 'bundler', '>= 1.3'
 
-  spec.add_development_dependency "rake", "~> 10.0"
+  spec.add_development_dependency "rake", ">= 10.0"
 end
