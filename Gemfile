@@ -14,7 +14,6 @@ gem 'remotipart', github: 'mshibuya/remotipart', ref: '3a6acb3'
 gem 'route_translator', github: 'enriclluelles/route_translator', branch: 'feature/rails5'
 gem 'active_type', github: 'patleb/active_type'
 gem 'kaminari', github: 'amatsuda/kaminari', branch: '0-17-stable'
-gem 'nprogress-rails', github: 'VictorBersy/nprogress-rails', branch: 'add-turbolinks-5'
 gem 'sprockets-derailleur', github: 'patleb/sprockets-derailleur'
 
 # Use Redis adapter to run Action Cable in production
