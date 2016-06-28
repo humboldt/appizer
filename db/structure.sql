@@ -42,10 +42,10 @@ CREATE TABLE ar_internal_metadata (
 
 
 --
--- Name: form_emails; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: nice_form_emails; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE TABLE form_emails (
+CREATE TABLE nice_form_emails (
     id integer NOT NULL,
     with_email boolean DEFAULT false,
     send_to character varying,
@@ -59,10 +59,10 @@ CREATE TABLE form_emails (
 
 
 --
--- Name: form_emails_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: nice_form_emails_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE form_emails_id_seq
+CREATE SEQUENCE nice_form_emails_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -71,17 +71,17 @@ CREATE SEQUENCE form_emails_id_seq
 
 
 --
--- Name: form_emails_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: nice_form_emails_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE form_emails_id_seq OWNED BY form_emails.id;
+ALTER SEQUENCE nice_form_emails_id_seq OWNED BY nice_form_emails.id;
 
 
 --
--- Name: form_fields; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: nice_form_fields; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE TABLE form_fields (
+CREATE TABLE nice_form_fields (
     id integer NOT NULL,
     structure_id integer,
     "position" integer,
@@ -95,10 +95,10 @@ CREATE TABLE form_fields (
 
 
 --
--- Name: form_fields_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: nice_form_fields_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE form_fields_id_seq
+CREATE SEQUENCE nice_form_fields_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -107,17 +107,17 @@ CREATE SEQUENCE form_fields_id_seq
 
 
 --
--- Name: form_fields_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: nice_form_fields_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE form_fields_id_seq OWNED BY form_fields.id;
+ALTER SEQUENCE nice_form_fields_id_seq OWNED BY nice_form_fields.id;
 
 
 --
--- Name: form_rows; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: nice_form_rows; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE TABLE form_rows (
+CREATE TABLE nice_form_rows (
     id integer NOT NULL,
     structure_id integer,
     locale character varying,
@@ -147,10 +147,10 @@ CREATE TABLE form_rows (
 
 
 --
--- Name: form_rows_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: nice_form_rows_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE form_rows_id_seq
+CREATE SEQUENCE nice_form_rows_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -159,17 +159,17 @@ CREATE SEQUENCE form_rows_id_seq
 
 
 --
--- Name: form_rows_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: nice_form_rows_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE form_rows_id_seq OWNED BY form_rows.id;
+ALTER SEQUENCE nice_form_rows_id_seq OWNED BY nice_form_rows.id;
 
 
 --
--- Name: form_structures; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: nice_form_structures; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE TABLE form_structures (
+CREATE TABLE nice_form_structures (
     id integer NOT NULL,
     email_id integer,
     created_at timestamp without time zone NOT NULL,
@@ -178,10 +178,10 @@ CREATE TABLE form_structures (
 
 
 --
--- Name: form_structures_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: nice_form_structures_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE form_structures_id_seq
+CREATE SEQUENCE nice_form_structures_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -190,10 +190,311 @@ CREATE SEQUENCE form_structures_id_seq
 
 
 --
--- Name: form_structures_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: nice_form_structures_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE form_structures_id_seq OWNED BY form_structures.id;
+ALTER SEQUENCE nice_form_structures_id_seq OWNED BY nice_form_structures.id;
+
+
+--
+-- Name: nice_unique_keys; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE nice_unique_keys (
+    id integer NOT NULL,
+    viewable_type character varying,
+    viewable_id integer,
+    view_path text NOT NULL,
+    name text NOT NULL,
+    "position" integer NOT NULL,
+    locale character varying NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: nice_unique_keys_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE nice_unique_keys_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: nice_unique_keys_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE nice_unique_keys_id_seq OWNED BY nice_unique_keys.id;
+
+
+--
+-- Name: nice_viewable_blocks; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE nice_viewable_blocks (
+    id integer NOT NULL,
+    uuid character varying,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: nice_viewable_blocks_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE nice_viewable_blocks_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: nice_viewable_blocks_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE nice_viewable_blocks_id_seq OWNED BY nice_viewable_blocks.id;
+
+
+--
+-- Name: nice_viewable_forms; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE nice_viewable_forms (
+    id integer NOT NULL,
+    structure_id integer,
+    uuid character varying,
+    url text,
+    title character varying,
+    meta_keywords text,
+    meta_description text,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: nice_viewable_forms_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE nice_viewable_forms_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: nice_viewable_forms_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE nice_viewable_forms_id_seq OWNED BY nice_viewable_forms.id;
+
+
+--
+-- Name: nice_viewable_images; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE nice_viewable_images (
+    id integer NOT NULL,
+    title character varying,
+    image text,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: nice_viewable_images_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE nice_viewable_images_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: nice_viewable_images_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE nice_viewable_images_id_seq OWNED BY nice_viewable_images.id;
+
+
+--
+-- Name: nice_viewable_links; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE nice_viewable_links (
+    id integer NOT NULL,
+    title character varying,
+    url text,
+    page text,
+    file text,
+    target_blank boolean DEFAULT false,
+    turbolink boolean DEFAULT true,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: nice_viewable_links_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE nice_viewable_links_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: nice_viewable_links_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE nice_viewable_links_id_seq OWNED BY nice_viewable_links.id;
+
+
+--
+-- Name: nice_viewable_pages; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE nice_viewable_pages (
+    id integer NOT NULL,
+    uuid character varying,
+    url text,
+    title character varying,
+    meta_keywords text,
+    meta_description text,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: nice_viewable_pages_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE nice_viewable_pages_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: nice_viewable_pages_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE nice_viewable_pages_id_seq OWNED BY nice_viewable_pages.id;
+
+
+--
+-- Name: nice_viewable_selects; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE nice_viewable_selects (
+    id integer NOT NULL,
+    value character varying,
+    label character varying,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: nice_viewable_selects_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE nice_viewable_selects_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: nice_viewable_selects_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE nice_viewable_selects_id_seq OWNED BY nice_viewable_selects.id;
+
+
+--
+-- Name: nice_viewable_strings; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE nice_viewable_strings (
+    id integer NOT NULL,
+    string character varying,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: nice_viewable_strings_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE nice_viewable_strings_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: nice_viewable_strings_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE nice_viewable_strings_id_seq OWNED BY nice_viewable_strings.id;
+
+
+--
+-- Name: nice_viewable_texts; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE nice_viewable_texts (
+    id integer NOT NULL,
+    title character varying,
+    text text,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: nice_viewable_texts_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE nice_viewable_texts_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: nice_viewable_texts_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE nice_viewable_texts_id_seq OWNED BY nice_viewable_texts.id;
 
 
 --
@@ -274,42 +575,6 @@ CREATE SEQUENCE settings_id_seq
 --
 
 ALTER SEQUENCE settings_id_seq OWNED BY settings.id;
-
-
---
--- Name: unique_keys; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE unique_keys (
-    id integer NOT NULL,
-    viewable_type character varying,
-    viewable_id integer,
-    view_path text NOT NULL,
-    name text NOT NULL,
-    "position" integer NOT NULL,
-    locale character varying NOT NULL,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
-);
-
-
---
--- Name: unique_keys_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE unique_keys_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: unique_keys_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE unique_keys_id_seq OWNED BY unique_keys.id;
 
 
 --
@@ -426,296 +691,94 @@ ALTER SEQUENCE versions_id_seq OWNED BY versions.id;
 
 
 --
--- Name: viewable_blocks; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-CREATE TABLE viewable_blocks (
-    id integer NOT NULL,
-    uuid character varying,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
-);
-
-
---
--- Name: viewable_blocks_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE viewable_blocks_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: viewable_blocks_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE viewable_blocks_id_seq OWNED BY viewable_blocks.id;
-
-
---
--- Name: viewable_forms; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE viewable_forms (
-    id integer NOT NULL,
-    structure_id integer,
-    uuid character varying,
-    url text,
-    title character varying,
-    meta_keywords text,
-    meta_description text,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
-);
-
-
---
--- Name: viewable_forms_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE viewable_forms_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: viewable_forms_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE viewable_forms_id_seq OWNED BY viewable_forms.id;
-
-
---
--- Name: viewable_images; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE viewable_images (
-    id integer NOT NULL,
-    title character varying,
-    image text,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
-);
-
-
---
--- Name: viewable_images_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE viewable_images_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: viewable_images_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE viewable_images_id_seq OWNED BY viewable_images.id;
-
-
---
--- Name: viewable_links; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE viewable_links (
-    id integer NOT NULL,
-    title character varying,
-    url text,
-    page text,
-    file text,
-    target_blank boolean DEFAULT false,
-    turbolink boolean DEFAULT true,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
-);
-
-
---
--- Name: viewable_links_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE viewable_links_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: viewable_links_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE viewable_links_id_seq OWNED BY viewable_links.id;
-
-
---
--- Name: viewable_pages; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE viewable_pages (
-    id integer NOT NULL,
-    uuid character varying,
-    url text,
-    title character varying,
-    meta_keywords text,
-    meta_description text,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
-);
-
-
---
--- Name: viewable_pages_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE viewable_pages_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: viewable_pages_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE viewable_pages_id_seq OWNED BY viewable_pages.id;
-
-
---
--- Name: viewable_selects; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE viewable_selects (
-    id integer NOT NULL,
-    value character varying,
-    label character varying,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
-);
-
-
---
--- Name: viewable_selects_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE viewable_selects_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: viewable_selects_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE viewable_selects_id_seq OWNED BY viewable_selects.id;
-
-
---
--- Name: viewable_strings; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE viewable_strings (
-    id integer NOT NULL,
-    string character varying,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
-);
-
-
---
--- Name: viewable_strings_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE viewable_strings_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: viewable_strings_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE viewable_strings_id_seq OWNED BY viewable_strings.id;
-
-
---
--- Name: viewable_texts; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE viewable_texts (
-    id integer NOT NULL,
-    title character varying,
-    text text,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
-);
-
-
---
--- Name: viewable_texts_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE viewable_texts_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: viewable_texts_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE viewable_texts_id_seq OWNED BY viewable_texts.id;
+ALTER TABLE ONLY nice_form_emails ALTER COLUMN id SET DEFAULT nextval('nice_form_emails_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY form_emails ALTER COLUMN id SET DEFAULT nextval('form_emails_id_seq'::regclass);
+ALTER TABLE ONLY nice_form_fields ALTER COLUMN id SET DEFAULT nextval('nice_form_fields_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY form_fields ALTER COLUMN id SET DEFAULT nextval('form_fields_id_seq'::regclass);
+ALTER TABLE ONLY nice_form_rows ALTER COLUMN id SET DEFAULT nextval('nice_form_rows_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY form_rows ALTER COLUMN id SET DEFAULT nextval('form_rows_id_seq'::regclass);
+ALTER TABLE ONLY nice_form_structures ALTER COLUMN id SET DEFAULT nextval('nice_form_structures_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY form_structures ALTER COLUMN id SET DEFAULT nextval('form_structures_id_seq'::regclass);
+ALTER TABLE ONLY nice_unique_keys ALTER COLUMN id SET DEFAULT nextval('nice_unique_keys_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY nice_viewable_blocks ALTER COLUMN id SET DEFAULT nextval('nice_viewable_blocks_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY nice_viewable_forms ALTER COLUMN id SET DEFAULT nextval('nice_viewable_forms_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY nice_viewable_images ALTER COLUMN id SET DEFAULT nextval('nice_viewable_images_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY nice_viewable_links ALTER COLUMN id SET DEFAULT nextval('nice_viewable_links_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY nice_viewable_pages ALTER COLUMN id SET DEFAULT nextval('nice_viewable_pages_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY nice_viewable_selects ALTER COLUMN id SET DEFAULT nextval('nice_viewable_selects_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY nice_viewable_strings ALTER COLUMN id SET DEFAULT nextval('nice_viewable_strings_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY nice_viewable_texts ALTER COLUMN id SET DEFAULT nextval('nice_viewable_texts_id_seq'::regclass);
 
 
 --
@@ -730,13 +793,6 @@ ALTER TABLE ONLY rich_rich_files ALTER COLUMN id SET DEFAULT nextval('rich_rich_
 --
 
 ALTER TABLE ONLY settings ALTER COLUMN id SET DEFAULT nextval('settings_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY unique_keys ALTER COLUMN id SET DEFAULT nextval('unique_keys_id_seq'::regclass);
 
 
 --
@@ -761,62 +817,6 @@ ALTER TABLE ONLY versions ALTER COLUMN id SET DEFAULT nextval('versions_id_seq':
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY viewable_blocks ALTER COLUMN id SET DEFAULT nextval('viewable_blocks_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY viewable_forms ALTER COLUMN id SET DEFAULT nextval('viewable_forms_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY viewable_images ALTER COLUMN id SET DEFAULT nextval('viewable_images_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY viewable_links ALTER COLUMN id SET DEFAULT nextval('viewable_links_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY viewable_pages ALTER COLUMN id SET DEFAULT nextval('viewable_pages_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY viewable_selects ALTER COLUMN id SET DEFAULT nextval('viewable_selects_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY viewable_strings ALTER COLUMN id SET DEFAULT nextval('viewable_strings_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY viewable_texts ALTER COLUMN id SET DEFAULT nextval('viewable_texts_id_seq'::regclass);
-
-
---
 -- Name: ar_internal_metadata_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -825,35 +825,107 @@ ALTER TABLE ONLY ar_internal_metadata
 
 
 --
--- Name: form_emails_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: nice_form_emails_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY form_emails
-    ADD CONSTRAINT form_emails_pkey PRIMARY KEY (id);
-
-
---
--- Name: form_fields_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY form_fields
-    ADD CONSTRAINT form_fields_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY nice_form_emails
+    ADD CONSTRAINT nice_form_emails_pkey PRIMARY KEY (id);
 
 
 --
--- Name: form_rows_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: nice_form_fields_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY form_rows
-    ADD CONSTRAINT form_rows_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY nice_form_fields
+    ADD CONSTRAINT nice_form_fields_pkey PRIMARY KEY (id);
 
 
 --
--- Name: form_structures_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: nice_form_rows_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY form_structures
-    ADD CONSTRAINT form_structures_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY nice_form_rows
+    ADD CONSTRAINT nice_form_rows_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: nice_form_structures_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY nice_form_structures
+    ADD CONSTRAINT nice_form_structures_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: nice_unique_keys_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY nice_unique_keys
+    ADD CONSTRAINT nice_unique_keys_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: nice_viewable_blocks_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY nice_viewable_blocks
+    ADD CONSTRAINT nice_viewable_blocks_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: nice_viewable_forms_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY nice_viewable_forms
+    ADD CONSTRAINT nice_viewable_forms_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: nice_viewable_images_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY nice_viewable_images
+    ADD CONSTRAINT nice_viewable_images_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: nice_viewable_links_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY nice_viewable_links
+    ADD CONSTRAINT nice_viewable_links_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: nice_viewable_pages_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY nice_viewable_pages
+    ADD CONSTRAINT nice_viewable_pages_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: nice_viewable_selects_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY nice_viewable_selects
+    ADD CONSTRAINT nice_viewable_selects_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: nice_viewable_strings_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY nice_viewable_strings
+    ADD CONSTRAINT nice_viewable_strings_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: nice_viewable_texts_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY nice_viewable_texts
+    ADD CONSTRAINT nice_viewable_texts_pkey PRIMARY KEY (id);
 
 
 --
@@ -881,14 +953,6 @@ ALTER TABLE ONLY settings
 
 
 --
--- Name: unique_keys_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY unique_keys
-    ADD CONSTRAINT unique_keys_pkey PRIMARY KEY (id);
-
-
---
 -- Name: users_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -913,88 +977,80 @@ ALTER TABLE ONLY versions
 
 
 --
--- Name: viewable_blocks_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: index_nice_form_fields_on_structure_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY viewable_blocks
-    ADD CONSTRAINT viewable_blocks_pkey PRIMARY KEY (id);
-
-
---
--- Name: viewable_forms_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY viewable_forms
-    ADD CONSTRAINT viewable_forms_pkey PRIMARY KEY (id);
+CREATE INDEX index_nice_form_fields_on_structure_id ON nice_form_fields USING btree (structure_id);
 
 
 --
--- Name: viewable_images_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: index_nice_form_rows_on_structure_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY viewable_images
-    ADD CONSTRAINT viewable_images_pkey PRIMARY KEY (id);
-
-
---
--- Name: viewable_links_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY viewable_links
-    ADD CONSTRAINT viewable_links_pkey PRIMARY KEY (id);
+CREATE INDEX index_nice_form_rows_on_structure_id ON nice_form_rows USING btree (structure_id);
 
 
 --
--- Name: viewable_pages_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: index_nice_form_structures_on_email_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY viewable_pages
-    ADD CONSTRAINT viewable_pages_pkey PRIMARY KEY (id);
-
-
---
--- Name: viewable_selects_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY viewable_selects
-    ADD CONSTRAINT viewable_selects_pkey PRIMARY KEY (id);
+CREATE INDEX index_nice_form_structures_on_email_id ON nice_form_structures USING btree (email_id);
 
 
 --
--- Name: viewable_strings_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: index_nice_unique_keys_on_unique_key; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY viewable_strings
-    ADD CONSTRAINT viewable_strings_pkey PRIMARY KEY (id);
-
-
---
--- Name: viewable_texts_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY viewable_texts
-    ADD CONSTRAINT viewable_texts_pkey PRIMARY KEY (id);
+CREATE UNIQUE INDEX index_nice_unique_keys_on_unique_key ON nice_unique_keys USING btree (viewable_type, view_path, name, "position", locale);
 
 
 --
--- Name: index_form_fields_on_structure_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_nice_unique_keys_on_viewable_type_and_viewable_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE INDEX index_form_fields_on_structure_id ON form_fields USING btree (structure_id);
-
-
---
--- Name: index_form_rows_on_structure_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_form_rows_on_structure_id ON form_rows USING btree (structure_id);
+CREATE INDEX index_nice_unique_keys_on_viewable_type_and_viewable_id ON nice_unique_keys USING btree (viewable_type, viewable_id);
 
 
 --
--- Name: index_form_structures_on_email_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_nice_viewable_blocks_on_uuid; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE INDEX index_form_structures_on_email_id ON form_structures USING btree (email_id);
+CREATE INDEX index_nice_viewable_blocks_on_uuid ON nice_viewable_blocks USING btree (uuid);
+
+
+--
+-- Name: index_nice_viewable_forms_on_structure_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_nice_viewable_forms_on_structure_id ON nice_viewable_forms USING btree (structure_id);
+
+
+--
+-- Name: index_nice_viewable_forms_on_url; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_nice_viewable_forms_on_url ON nice_viewable_forms USING btree (url);
+
+
+--
+-- Name: index_nice_viewable_forms_on_uuid; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_nice_viewable_forms_on_uuid ON nice_viewable_forms USING btree (uuid);
+
+
+--
+-- Name: index_nice_viewable_pages_on_url; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_nice_viewable_pages_on_url ON nice_viewable_pages USING btree (url);
+
+
+--
+-- Name: index_nice_viewable_pages_on_uuid; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_nice_viewable_pages_on_uuid ON nice_viewable_pages USING btree (uuid);
 
 
 --
@@ -1002,20 +1058,6 @@ CREATE INDEX index_form_structures_on_email_id ON form_structures USING btree (e
 --
 
 CREATE UNIQUE INDEX index_settings_on_name ON settings USING btree (name);
-
-
---
--- Name: index_unique_keys_on_unique_key; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE UNIQUE INDEX index_unique_keys_on_unique_key ON unique_keys USING btree (viewable_type, view_path, name, "position", locale);
-
-
---
--- Name: index_unique_keys_on_viewable_type_and_viewable_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_unique_keys_on_viewable_type_and_viewable_id ON unique_keys USING btree (viewable_type, viewable_id);
 
 
 --
@@ -1065,48 +1107,6 @@ CREATE INDEX index_versions_on_item_type_and_item_id ON versions USING btree (it
 --
 
 CREATE INDEX index_versions_on_transaction_id ON versions USING btree (transaction_id);
-
-
---
--- Name: index_viewable_blocks_on_uuid; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_viewable_blocks_on_uuid ON viewable_blocks USING btree (uuid);
-
-
---
--- Name: index_viewable_forms_on_structure_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_viewable_forms_on_structure_id ON viewable_forms USING btree (structure_id);
-
-
---
--- Name: index_viewable_forms_on_url; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_viewable_forms_on_url ON viewable_forms USING btree (url);
-
-
---
--- Name: index_viewable_forms_on_uuid; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_viewable_forms_on_uuid ON viewable_forms USING btree (uuid);
-
-
---
--- Name: index_viewable_pages_on_url; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_viewable_pages_on_url ON viewable_pages USING btree (url);
-
-
---
--- Name: index_viewable_pages_on_uuid; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_viewable_pages_on_uuid ON viewable_pages USING btree (uuid);
 
 
 --

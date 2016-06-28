@@ -37,7 +37,7 @@ RailsAdmin.config do |config|
 
   ### More at https://github.com/sferik/rails_admin/wiki/Base-configuration
 
-  config.included_models = Naming::Viewable.models + Naming::Form.models + %w[
+  config.included_models = Naming::Nice::Viewable.models + Naming::Nice::Form.models + %w[
     UniqueKey
     Setting
     Rich::RichFile
@@ -47,25 +47,25 @@ RailsAdmin.config do |config|
     dashboard                     # mandatory
     index                         # mandatory
     new do
-      except Naming::Viewable.models + Naming::Form.models + %w[
+      except Naming::Nice::Viewable.models + Naming::Nice::Form.models + %w[
         UniqueKey
         Setting
         Rich::RichFile
       ]
     end
     export do
-      except Naming::Viewable.models + Naming::Form.structure_models + %w[
+      except Naming::Nice::Viewable.models + Naming::Nice::Form.structure_models + %w[
         UniqueKey
       ]
     end
     bulk_delete do
-      except Naming::Viewable.models + Naming::Form.structure_models + %w[
-        UniqueKey
+      except Naming::Nice::Viewable.models + Naming::Nice::Form.structure_models + %w[
+        Nice::UniqueKey
         Setting
       ]
     end
     show do
-      except Naming::Viewable.models + Naming::Form.structure_models + %w[
+      except Naming::Nice::Viewable.models + Naming::Nice::Form.structure_models + %w[
         UniqueKey
       ]
     end
@@ -75,7 +75,7 @@ RailsAdmin.config do |config|
       ]
     end
     delete do
-      except Naming::Form.structure_models + %w[
+      except Naming::Nice::Form.structure_models + %w[
         UniqueKey
         Setting
       ]
