@@ -14,15 +14,9 @@
 
 @import "nice/variables";
 @import "variables";
+
 @import "nice/mixins";
 @import "mixins";
-
-@import "bootstrap-sprockets";
-@import "bootswatch/paper/variables";
-@import "bootstrap";
-@import "bootswatch/paper/bootswatch";
-@import "nprogress";
-@import "xray_require";
 
 @import "nice/theming";
 @import "theming";
