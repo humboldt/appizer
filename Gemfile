@@ -15,6 +15,8 @@ gem 'route_translator', github: 'enriclluelles/route_translator', branch: 'featu
 gem 'active_type', github: 'patleb/active_type'
 gem 'kaminari', github: 'amatsuda/kaminari', branch: '0-17-stable'
 gem 'sprockets-derailleur', github: 'patleb/sprockets-derailleur'
+gem 'ar-uuid', github: 'patleb/ar-uuid'
+gem 'orm_adapter', github: 'patleb/orm_adapter'
 
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
@@ -38,6 +40,7 @@ group :development, :test do
   gem 'xray-rails', github: 'patleb/xray-rails'
   gem 'letter_opener'
   gem 'letter_opener_web', '~> 1.2.0'
+  gem 'active_record_query_trace'
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
