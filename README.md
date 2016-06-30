@@ -1,6 +1,13 @@
 # Appizer
 
-TODO: redirect_to :back --> http://blog.bigbinary.com/2016/02/29/rails-5-improves-redirect_to_back-with-redirect-back.html
+TODO: CanCan
+TODO: paper_trail (uuid)
+TODO: translations in hstore and some RailsAdmin js tabs
+TODO: make the platform work when languages are added
+TODO: MenuItem viewable model
+TODO: Select Themes
+TODO: Sprockets 4
+TODO: gem 'http_accept_language'
 
 TODO: Delete this and describe your gem
 

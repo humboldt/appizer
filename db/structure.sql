@@ -44,6 +44,34 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
+-- Name: account_users; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE account_users (
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    id uuid DEFAULT uuid_generate_v1mc() NOT NULL,
+    account_id uuid,
+    user_id uuid,
+    last_accessed_at timestamp without time zone,
+    admin boolean DEFAULT false NOT NULL,
+    "primary" boolean DEFAULT false NOT NULL
+);
+
+
+--
+-- Name: accounts; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE accounts (
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    id uuid DEFAULT uuid_generate_v1mc() NOT NULL,
+    legal_name character varying NOT NULL
+);
+
+
+--
 -- Name: ar_internal_metadata; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -329,7 +357,7 @@ CREATE TABLE users (
     confirmed_at timestamp without time zone,
     confirmation_sent_at timestamp without time zone,
     unconfirmed_email character varying,
-    admin boolean DEFAULT false
+    admin boolean DEFAULT false NOT NULL
 );
 
 
@@ -361,6 +389,22 @@ CREATE TABLE versions (
     object_changes text,
     transaction_id integer
 );
+
+
+--
+-- Name: account_users_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY account_users
+    ADD CONSTRAINT account_users_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: accounts_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY accounts
+    ADD CONSTRAINT accounts_pkey PRIMARY KEY (id);
 
 
 --
@@ -521,6 +565,41 @@ ALTER TABLE ONLY version_associations
 
 ALTER TABLE ONLY versions
     ADD CONSTRAINT versions_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: index_account_users_on_account_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_account_users_on_account_id ON account_users USING btree (account_id);
+
+
+--
+-- Name: index_account_users_on_created_at; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_account_users_on_created_at ON account_users USING btree (created_at);
+
+
+--
+-- Name: index_account_users_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_account_users_on_user_id ON account_users USING btree (user_id);
+
+
+--
+-- Name: index_accounts_on_created_at; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_accounts_on_created_at ON accounts USING btree (created_at);
+
+
+--
+-- Name: index_accounts_on_legal_name; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_accounts_on_legal_name ON accounts USING btree (legal_name);
 
 
 --
@@ -746,6 +825,6 @@ CREATE INDEX index_versions_on_transaction_id ON versions USING btree (transacti
 
 SET search_path TO "$user",public;
 
-INSERT INTO schema_migrations (version) VALUES ('20150110040652'), ('20150111082038'), ('20150111082039'), ('20150111082040'), ('20150111082041'), ('20151222142937'), ('20151222202133'), ('20151222225829'), ('20151226023652'), ('20151226054335'), ('20151227064933'), ('20151228231201'), ('20151230050603'), ('20151230072904'), ('20151230085947'), ('20151231054310'), ('20151231102148'), ('20160101124428'), ('20160101140244'), ('20160101141844'), ('20160102010317'), ('20160103120544'), ('20160111072418'), ('20160201181310'), ('20160214200553'), ('20160216142231');
+INSERT INTO schema_migrations (version) VALUES ('20150110040652'), ('20150111082038'), ('20150111082039'), ('20150111082040'), ('20150111082041'), ('20151222142937'), ('20151222202133'), ('20151222225829'), ('20151226023652'), ('20151226054335'), ('20151227064933'), ('20151228231201'), ('20151230050603'), ('20151230072904'), ('20151230085947'), ('20151231054310'), ('20151231102148'), ('20160101124428'), ('20160101140244'), ('20160101141844'), ('20160102010317'), ('20160103120544'), ('20160111072418'), ('20160201181310'), ('20160214200553'), ('20160216142231'), ('20160629052658'), ('20160629061404');
 
 

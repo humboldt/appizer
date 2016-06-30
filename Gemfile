@@ -11,12 +11,13 @@ gem 'rails_admin_history_rollback', github: 'patleb/rails_admin_history_rollback
 # gem 'rails_admin_globalize_field', github: 'patleb/rails_admin_globalize_field', branch: 'master'
 # gem 'globalize', github: 'globalize/globalize', branch: 'fix_type_cast_from_database'
 gem 'remotipart', github: 'mshibuya/remotipart', ref: '3a6acb3'
-gem 'route_translator', github: 'enriclluelles/route_translator', branch: 'feature/rails5'
+gem 'route_translator', github: 'patleb/route_translator', branch: 'feature/rails5'
 gem 'active_type', github: 'patleb/active_type'
 gem 'kaminari', github: 'amatsuda/kaminari', branch: '0-17-stable'
 gem 'sprockets-derailleur', github: 'patleb/sprockets-derailleur'
 gem 'ar-uuid', github: 'patleb/ar-uuid'
 gem 'orm_adapter', github: 'patleb/orm_adapter'
+gem 'acts_as_tenant', github: 'patleb/acts_as_tenant'
 
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
