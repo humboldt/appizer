@@ -18,6 +18,7 @@ gem 'sprockets-derailleur', github: 'patleb/sprockets-derailleur'
 gem 'ar-uuid', github: 'patleb/ar-uuid'
 gem 'orm_adapter', github: 'patleb/orm_adapter'
 gem 'acts_as_tenant', github: 'patleb/acts_as_tenant'
+gem 'devise', github: 'patleb/devise'
 
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
