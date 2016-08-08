@@ -60,6 +60,8 @@ set :linked_files, fetch(:linked_files, []).push(*%W[
 
 set :whenever_identifier, ->{ "#{fetch(:application)}-#{fetch(:stage)}" }
 
+set :format, :airbrussh
+
 namespace :deploy do
   after :restart, :clear_cache do
     on roles(:web), in: :groups, limit: 3, wait: 10 do

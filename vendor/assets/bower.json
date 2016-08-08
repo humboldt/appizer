@@ -1,0 +1,10 @@
+{
+  "name": "dsl-generated dependencies",
+  "dependencies": {
+    "normalize-css": "latest",
+    "jquery-ui": "latest",
+    "jquery-lazy": "latest",
+    "onmount": "latest",
+    "trix": "latest"
+  }
+}

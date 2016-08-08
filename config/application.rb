@@ -18,6 +18,13 @@ Bundler.require(*Rails.groups)
 
 module Appizer
   class Application < Rails::Application
+    initializer :regenerate_require_cache, before: :load_environment_config do
+      Bootscale.regenerate
+    end
+
+    config.middleware.use Middleware::Obfuscator
+
+    config.railties_order = [:all, Nice::Engine, :main_app]
 
     config.to_prepare do
       # Load application's model / class decorators
@@ -34,7 +41,7 @@ module Appizer
     config.i18n.default_locale = :fr
     config.i18n.available_locales = [:fr, :en]
 
-    # config.active_job.queue_adapter = :que
+    # config.active_job.queue_adapter = :que TODO :sidekiq
     config.active_record.schema_format = :sql
 
     config.action_view.embed_authenticity_token_in_remote_forms = true
@@ -46,5 +53,19 @@ module Appizer
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
+    # Compiler options
+
+    # Opal
+    # config.opal.method_missing      = true
+    # config.opal.optimized_operators = true
+    # config.opal.arity_check         = false
+    # config.opal.const_missing       = true
+    # config.opal.dynamic_require_severity = :ignore
+
+    # Enable/disable /opal_specs route
+    # config.opal.enable_specs = true
+
+    # The path to opal specs from Rails.root
+    # config.opal.spec_location = 'spec-opal'
   end
 end

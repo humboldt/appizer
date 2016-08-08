@@ -86,3 +86,12 @@ tools/bower/vendor/*
 ## File-based project format:
 *.ipr
 *.iws
+
+## Bower packages
+/vendor/assets/bower_components/*
+!/vendor/assets/bower_components/onmount/index.js
+!/vendor/assets/bower_components/tether/dist/css/tether.css
+!/vendor/assets/bower_components/tether/dist/css/tether-theme-arrows.css
+!/vendor/assets/bower_components/tether/dist/css/tether-theme-arrows-dark.css
+!/vendor/assets/bower_components/tether/dist/css/tether-theme-basic.css
+!/vendor/assets/bower_components/tether/dist/js/tether.js

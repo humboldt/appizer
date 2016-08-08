@@ -1,9 +1,9 @@
 module Form
-  class Contact < Static::Object # < Static::Base
-    include Admin::Form::Static::Object
+  class Contact < Nice::FormStatic::Object # < Static::Base
+    include Admin::Hidden
 
-    include Static::Email
-    include Static::Attachment
+    include Nice::FormStatic::Email
+    include Nice::FormStatic::Attachment
 
     # has_attachments :letter, :resume
     has_collections :periods

@@ -1,6 +1,9 @@
 # Appizer
 
-TODO: CanCan
+RAILS_ENV=production DATABASE_URL=postgresql://postgres:postgres@127.0.0.1/appizer_development bundle exec rake assets:precompile
+bundle exec guard -P livereload -w ~/Desktop/patleb/appizer ~/Desktop/patleb/surface-rb
+
+TODO: Consul
 TODO: paper_trail (uuid)
 TODO: translations in hstore and some RailsAdmin js tabs
 TODO: make the platform work when languages are added

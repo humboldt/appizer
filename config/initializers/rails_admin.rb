@@ -1,3 +1,4 @@
+if Object.const_defined?("RailsAdmin")
 RailsAdmin.config do |config|
   config.main_app_name = ["Dashboard", ""]
 
@@ -37,47 +38,51 @@ RailsAdmin.config do |config|
 
   ### More at https://github.com/sferik/rails_admin/wiki/Base-configuration
 
-  config.included_models = Naming::Nice::Viewable.models + Naming::Nice::Form.models + %w[
-    Nice::UniqueKey
-    Setting
+  config.included_models = Naming::Nice::Viewable.admin_models + Naming::Nice::Form.admin_models + %w[
+    Admin::Nice::UniqueKey
+    Admin::Setting
     Rich::RichFile
+    Admin::User
+    Admin::Account
+    Admin::AccountUser
   ]
 
   config.actions do
     dashboard                     # mandatory
     index                         # mandatory
     new do
-      except Naming::Nice::Viewable.models + Naming::Nice::Form.models + %w[
-        Nice::UniqueKey
-        Setting
+      except Naming::Nice::Viewable.admin_models + Naming::Nice::Form.admin_models + %w[
+        Admin::Nice::UniqueKey
+        Admin::Setting
         Rich::RichFile
       ]
     end
     export do
-      except Naming::Nice::Viewable.models + Naming::Nice::Form.structure_models + %w[
-        Nice::UniqueKey
+      except Naming::Nice::Viewable.admin_models + Naming::Nice::Form.admin_structure_models + %w[
+        Admin::Nice::UniqueKey
       ]
     end
     bulk_delete do
-      except Naming::Nice::Viewable.models + Naming::Nice::Form.structure_models + %w[
-        Nice::UniqueKey
-        Setting
+      except Naming::Nice::Viewable.admin_models + Naming::Nice::Form.admin_structure_models + %w[
+        Admin::Nice::UniqueKey
+        Admin::Setting
       ]
     end
     show do
-      except Naming::Nice::Viewable.models + Naming::Nice::Form.structure_models + %w[
-        Nice::UniqueKey
+      except Naming::Nice::Viewable.admin_models + Naming::Nice::Form.admin_structure_models + %w[
+        Admin::Nice::UniqueKey
       ]
     end
     edit do
       except %w[
-        Nice::UniqueKey
+        Admin::Nice::UniqueKey
+        Admin::User
       ]
     end
     delete do
-      except Naming::Nice::Form.structure_models + %w[
-        Nice::UniqueKey
-        Setting
+      except Naming::Nice::Form.admin_structure_models + %w[
+        Admin::Nice::UniqueKey
+        Admin::Setting
       ]
     end
     show_in_app
@@ -121,4 +126,5 @@ RailsAdmin.config do |config|
       end
     end
   end
+end
 end

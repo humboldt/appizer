@@ -23,5 +23,5 @@ guard 'livereload' do
   # Rails Assets Pipeline
   watch(%r{(app|vendor)(/assets/\w+/(.+\.(css|js|html|png|jpg))).*}) { |m| "/assets/#{m[3]}" }
   watch(%r{(app|vendor)(/assets/\w+/(.+)\.(scss))}) { |m| "/assets/#{m[3]}.css" }
-  watch(%r{(app|vendor)(/assets/\w+/(.+)\.(coffee))}) { |m| "/assets/#{m[3]}.js" }
+  watch(%r{(app|vendor)(/assets/\w+/(.+)\.(coffee|rb))}) { |m| "/assets/#{m[3]}.js" }
 end

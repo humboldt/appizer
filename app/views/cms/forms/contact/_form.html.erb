@@ -1,0 +1,23 @@
+<% nice_cache do
+   # select = nice_select(1, Float::INFINITY)
+-%>
+
+<%= nice_form_for do |f| %>
+  <%#= f.input :name, input_html: nice_validate_presence %>
+  <%#= f.input :email, input_html: nice_validate_email %>
+  <%#= f.input :periods, as: :check_boxes, collection: select.options, input_html: nice_validates(check_boxes: true) %>
+  <%#= select.edit_links(:value) %>
+
+  <% nice_form_instance.fields.each do |field| %>
+    <%= f.input field.column_key,
+      as: field.input_type,
+      required: field.required?,
+      label: field.label,
+      input_html: nice_validates(field.input_type => field.required?)
+    -%>
+  <% end %>
+
+  <%= f.submit nice_form_send, nice_form_sending %>
+<% end %>
+
+<% end %>

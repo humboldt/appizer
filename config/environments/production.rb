@@ -1,6 +1,6 @@
 Rails.application.configure do
 
-  hostname = todo.todo
+  hostname = 'todo.todo'
   config.action_controller.asset_host = "http://#{hostname}"
   config.action_mailer.asset_host = "http://#{hostname}"
   config.action_mailer.delivery_method = :smtp

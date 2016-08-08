@@ -1,11 +1,11 @@
-<%# view = nice_form %>
+<% view = nice_form %>
 
 <% nice_cache('top') do
   text = nice_text('top')
 -%>
 
-<%#= view.edit_link %>
-<%#= view.add_link %>
+<%= view.edit_link %>
+<%= view.add_link %>
 
 <%= text.html %>
 <%= text.edit_link %>

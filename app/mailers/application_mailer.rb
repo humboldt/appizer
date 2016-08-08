@@ -1,3 +1,2 @@
-class ApplicationMailer < Nice::BaseMailer
-  layout 'mailer'
+class ApplicationMailer < ActionMailer::Base
 end
