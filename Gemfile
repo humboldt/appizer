@@ -68,17 +68,17 @@ gem 'coffee-rails'
 # javascript (see Bowerfile for dependencies)
 gem 'jquery-rails'
 # gem 'local_time'
-gem 'turbolinks', '~> 5.x'
-gem 'unpoly-rails', github: 'patleb/unpoly'
+gem 'turbolinks', '~> 5'
 gem 'opal-rails', github: 'opal/opal-rails'
 gem 'opal-browser', github: 'opal/opal-browser'
 
 # css (see Bowerfile for dependencies)
 gem 'autoprefixer-rails'
 gem 'material_icons'
-gem 'surface-rb', path: '/home/plebel/Desktop/patleb/surface-rb'
+gem 'surfacer', path: '/home/plebel/Desktop/patleb/surface-rb'
 
 # views
+gem 'viewizer'
 gem 'nestive'
 gem 'country_select'
 gem 'i18n_country_select'

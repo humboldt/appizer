@@ -24,7 +24,7 @@ module Appizer
 
     config.middleware.use Middleware::Obfuscator
 
-    config.railties_order = [:all, Nice::Engine, :main_app]
+    config.railties_order = [:all, Viewizer::Engine, Nice::Engine, :main_app]
 
     config.to_prepare do
       # Load application's model / class decorators
