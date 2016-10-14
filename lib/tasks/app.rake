@@ -1,2 +1,0 @@
-namespace :app do
-end
