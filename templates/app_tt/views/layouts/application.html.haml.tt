@@ -1,0 +1,27 @@
+!!! 5
+%html.no-js{lang: I18n.locale}
+  %head
+    %meta{charset: 'utf-8'}
+    %meta{'http-equiv' => 'x-ua-compatible', content: 'ie=edge'}
+    %meta{name: 'viewport', content: 'width=device-width, initial-scale=1'}
+    %title <%= camelized %>
+    %meta{name: 'meta_keywords', content: '<%= camelized %>'}
+    %meta{name: 'description', content: '<%= camelized %>'}
+    %link{rel: 'apple-touch-icon', href: 'apple-touch-icon.png'}
+    = csrf_meta_tags
+    <%- if options[:skip_javascript] -%>
+    = stylesheet_link_tag    'application', media: 'all'
+    <%- else -%>
+      <%- if gemfile_entries.any? { |m| m.name == 'turbolinks' } -%>
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+      <%- else -%>
+    = stylesheet_link_tag    'application', media: 'all'
+    = javascript_include_tag 'application'
+      <%- end -%>
+    <%- end -%>
+    /[if lt IE 9]
+      %script{ :src => 'https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js' }
+      %script{ :src => 'https://oss.maxcdn.com/respond/1.4.2/respond.min.js' }
+  %body
+    = yield

@@ -1,0 +1,11 @@
+tasks = Rake.application.instance_variable_get('@tasks')
+tasks.each { |t| if (task_name = t.first) =~ /:install:migrations$/; tasks.delete(task_name) end }
+
+namespace :app do
+<%- unless options.api? -%>
+  desc 'create user'
+  task :create_user, [:email, :password] => :environment do |t, args|
+    User.create!(email: args[:email], password: args[:password], password_confirmation: args[:password])
+  end
+<%- end -%>
+end

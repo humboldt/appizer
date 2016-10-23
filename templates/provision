@@ -1,0 +1,21 @@
+#!/usr/bin/env ruby
+
+# ssh-add .vagrant/machines/default/virtualbox/private_key
+unless ['--vagrant', '--staging', '--production'].include? ARGV[0]
+  puts 'must have --vagrant, --staging or --production flag'
+  exit 0
+end
+
+stage = ARGV[0].tr('-', '')
+
+puts '#### provision admin role ####'
+puts `yes | bundle exec sun deploy #{stage} admin --sudo` # 3m06s --> 3m14s --> [mailcatcher] 12m38s --> 18m40s
+
+puts '#### system reboot, wait 40 seconds ####'
+sleep 40
+
+puts '#### provision deployer role ####'
+puts `yes | bundle exec sun deploy #{stage} deployer`     # 6m31s --> 7m30s --> 8m40s
+
+puts '#### deploy configs and code ####'
+puts `bundle exec cap #{stage} deploy:after_provisioning` # 1m41s --> 1m52s --> 2m36s

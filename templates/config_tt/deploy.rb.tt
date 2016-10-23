@@ -1,0 +1,108 @@
+# config valid only for current version of Capistrano
+lock '<%= cap_version %>'
+
+set :application, '<%= app_name %>'
+set :repo_url, 'git@github.com:patleb/<%= app_name %>.git'
+
+# Default branch is :master
+# ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
+
+# Default deploy_to directory is /var/www/my_app_name
+set :deploy_to, "/home/#{fetch(:deployer_name)}/#{fetch(:deploy_name)}"
+
+# Default value for :scm is :git
+# set :scm, :git
+
+# Default value for :format is :airbrussh.
+# set :format, :airbrussh
+
+# You can configure the Airbrussh format using :format_options.
+# These are the defaults.
+# set :format_options, command_output: true, log_file: 'log/capistrano.log', color: :auto, truncate: :auto
+
+# Default value for :pty is false
+set :pty, true
+
+# Default value for :linked_files is []
+append :linked_files, 'config/secrets.yml'
+
+# Default value for linked_dirs is []
+append :linked_dirs, *%w[
+  log
+  tmp/pids
+  tmp/cache
+  tmp/sockets
+  tmp/backups
+  public/system
+]
+
+# Default value for default_env is {}
+# set :default_env, { path: "/opt/ruby/bin:$PATH" }
+
+# Default value for keep_releases is 5
+# set :keep_releases, 5
+
+set :rbenv_type, :user # or :system, depends on your rbenv setup
+set :rbenv_ruby, File.read('.ruby-version').strip
+set :rbenv_prefix, "RBENV_ROOT=#{fetch(:rbenv_path)} RBENV_VERSION=#{fetch(:rbenv_ruby)} #{fetch(:rbenv_path)}/bin/rbenv exec"
+set :rbenv_map_bins, %w{rake gem bundle ruby rails}
+# set :rbenv_roles, :all # default value
+
+# set :bundle_bins, fetch(:bundle_bins, []).push('my_new_binary')
+# set :bundle_roles, :all                                         # this is default
+# set :bundle_servers, -> { release_roles(fetch(:bundle_roles)) } # this is default
+# set :bundle_binstubs, -> { shared_path.join('bin') }            # default: nil, if set, then generates binstubs on each deploy
+# set :bundle_gemfile, -> { release_path.join('MyGemfile') }      # default: nil
+# set :bundle_path, -> { shared_path.join('bundle') }             # this is default
+# set :bundle_without, %w{development test}.join(' ')             # this is default
+# set :bundle_flags, '--deployment --quiet'                       # this is default
+# set :bundle_env_variables, {}                                   # this is default
+# set :bundle_jobs, 4                                             # default: nil, parallelize with 4 cores, only available for Bundler >= 1.4
+
+# set :rails_env, 'staging'                                       # If the environment differs from the stage name
+# set :migration_role, :db                                        # Defaults to :db role
+# set :migration_servers, -> { primary(fetch(:migration_role)) }  # Defaults to the primary :db server
+# set :conditionally_migrate, true                                # Defaults to false, skip migration if files in db/migrate were not modified
+# set :assets_roles, [:web, :app]                                 # Defaults to [:web]
+# set :assets_prefix, 'prepackaged-assets'                        # Defaults to 'assets', this should match config.assets.prefix in your rails config/application.rb
+# If you need to touch public/images, public/javascripts, and public/stylesheets on each deploy
+# set :normalize_asset_timestamps, %w{public/images public/javascripts public/stylesheets}
+# Defaults to nil (no asset cleanup is performed)
+# If you use Rails 4+ and you'd like to clean up old assets after each deploy,
+# set this to the number of versions to keep
+# set :keep_assets, 2
+
+# set :passenger_roles, :app
+# set :passenger_restart_runner, :sequence
+# set :passenger_restart_wait, 5
+# set :passenger_restart_limit, 2
+# set :passenger_restart_with_sudo, false
+# set :passenger_environment_variables, {}
+set :passenger_restart_command, 'rbenv sudo passenger-config restart-app'
+# set :passenger_restart_options, -> { "#{deploy_to} --ignore-app-not-running" }
+
+# set :deployer_name, 'deployer'                      # default value
+# set :deploy_name, 'another_fullname'                # default to "#{fetch(:application)}_#{fetch(:stage)}"
+# set :port, 22                                       # default value
+
+# append :files_public_dirs, 'dir_within_public'      # default to ['system']
+# append :files_private_dirs, 'dir_within_private'    # default to []
+
+# set :nginx_max_body_size, '10m'                     # default value
+# append :nginx_public_dirs, 'dir_within_public'      # default to ['system', 'images']
+# append :nginx_public_files, 'any-public.html'       # default to ['404.html', '422.html', '500.html', 'favicon.ico', 'apple-touch-icon.png', 'apple-touch-icon-precomposed.png', 'robots.txt']
+
+# default to {} with keys as original urls and values as rewritten urls
+# set :nginx_redirects, fetch(:nginx_redirects, {}).merge({
+# })
+
+# set :monit_max_swap_size,   '25%'                                           # default value
+# set :monit_mail_address,    -> { fetch(:settings)[:monit_mail_address] }    # default value
+# set :monit_mail_port,       -> { fetch(:settings)[:monit_mail_port] }       # default value
+# set :monit_mail_username,   -> { fetch(:settings)[:monit_mail_username] }   # default value
+# set :monit_mail_password,   -> { fetch(:settings)[:monit_mail_password] }   # default value
+# set :monit_mail_recipients, -> { fetch(:settings)[:monit_mail_recipients] } # default value
+
+# set :admin_name, 'ubuntu' # default value
+
+set :whenever_identifier, ->{ "#{fetch(:application)}_#{fetch(:stage)}" }

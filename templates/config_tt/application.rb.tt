@@ -1,0 +1,83 @@
+require_relative 'boot'
+
+<% if include_all_railties? -%>
+require 'rails/all'
+<% else -%>
+require "rails"
+# Pick the frameworks you want:
+require "active_model/railtie"
+require "active_job/railtie"
+<%= comment_if :skip_active_record %>require "active_record/railtie"
+require "action_controller/railtie"
+<%= comment_if :skip_action_mailer %>require "action_mailer/railtie"
+require "action_view/railtie"
+<%= comment_if :skip_action_cable %>require "action_cable/engine"
+<%= comment_if :skip_sprockets %>require "sprockets/railtie"
+<%= comment_if :skip_test %>require "rails/test_unit/railtie"
+<% end -%>
+
+# Require the gems listed in Gemfile, including any gems
+# you've limited to :test, :development, or :production.
+Bundler.require(*Rails.groups)
+
+module <%= app_const_base %>
+  class Application < Rails::Application
+    # Settings in config/environments/* take precedence over those specified here.
+    # Application configuration should go into files in config/initializers
+    # -- all .rb files in that directory are automatically loaded.
+
+    initializer :regenerate_require_cache, before: :load_environment_config do
+      Bootscale.regenerate
+    end
+
+    # config.railties_order = [Any::Engine, :main_app, :all]
+
+    config.time_zone = 'Eastern Time (US & Canada)'
+
+    config.i18n.default_locale = :<%= options.locales.first %>
+    config.i18n.available_locales = <%= options.locales.map(&:to_sym) %>
+
+    config.active_job.queue_adapter = :inline
+    # config.active_job.queue_adapter = :que
+    # config.active_record.schema_format = :sql
+
+    config.action_view.embed_authenticity_token_in_remote_forms = true
+
+    # config.assets.paths << Rails.root.join("app", "assets", "fonts")
+    # config.assets.paths << Rails.root.join("vendor", "assets", "fonts")
+    # config.assets.precompile += %w( .svg .eot .woff .ttf)
+<%- if options[:api] -%>
+
+    # Only loads a smaller set of middleware suitable for API only apps.
+    # Middleware like session, flash, cookies can be added back manually.
+    # Skip views, helpers and assets when generating a new resource.
+    config.api_only = true
+<%- end -%>
+
+    config.to_prepare do
+      # Load application's model / class decorators
+      Dir.glob(File.join(File.dirname(__FILE__), "../app/**/*_decorator*.rb")) do |c|
+        Rails.configuration.cache_classes ? require(c) : load(c)
+      end
+      Dir.glob(File.join(File.dirname(__FILE__), "../lib/**/*_decorator*.rb")) do |c|
+        Rails.configuration.cache_classes ? require(c) : load(c)
+      end
+<%- unless options[:api] -%>
+
+      RailsAdmin::ApplicationController.class_eval do
+        include Notified::Loggable
+        include Notified::Rescuable
+
+        def self.skip_obfuscator
+          true
+        end
+      end
+
+      Dir[Rails.root.join('app', 'models', 'admin', '**', '*.rb')].each do |name|
+        model_name = File.basename(name).sub(/\.rb/, '').camelize
+        model_name.constantize.include "Admin::#{model_name}".constantize
+      end
+<%- end -%>
+    end
+  end
+end

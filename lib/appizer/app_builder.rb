@@ -1,5 +1,8 @@
 module Appizer
   class AppBuilder < Rails::AppBuilder
+    include Appizer::Helpers
+    include Appizer::Manifest
+
     def readme
       template 'README.md'
     end
@@ -8,104 +11,36 @@ module Appizer
       template '.gitignore'
     end
 
-    def app
-      empty_directory 'app'
-
-      inside 'app' do
-        directory 'assets'
-        keep_file 'assets/images'
-        directory 'controllers'
-        keep_file 'controllers/concerns'
-        template  'helpers/application_helper.rb'
-        directory 'mailers'
-        directory 'models'
-        keep_file 'models/concerns'
-        empty_directory 'views'
-
-        inside 'views' do
-          directory 'cms'
-          directory 'layouts'
-        end
-      end
-    end
-
-    def config
-      empty_directory 'config'
-
-      inside 'config' do
-        directory 'Backup'
-        directory 'deploy'
-        directory 'environments'
-        inside    'environments' do
-          configure_development
-          configure_production
-          template 'production.rb', 'staging.rb'
-          template 'production.rb', 'vagrant.rb'
-          configure_staging
-          configure_vagrant
-        end
-        directory 'initializers'
-        directory 'initializers_tt', 'initializers'
-        directory 'locales'
-        inside    'locales' do
-          remove_file 'devise.en.yml'
-          other_locales_each do |locale|
-            duplicate_locale locale
-            duplicate_locale locale, 'routes'
-            gsub_file "routes.#{locale}.yml", /page: page/, "page: #{locale}/page"
-            gsub_file "routes.#{locale}.yml", /contact: contact/, "contact: #{locale}/contact"
-            duplicate_locale locale, 'simple_form'
-          end
-        end
-        directory 'sunzi'
-        template  'application.rb'
-        configure_application
-        template  'database.yml'
-        template  'deploy.rb'
-        template  'environment.rb'
-        copy_file 'monitrc.erb'
-        copy_file 'nginx.app.conf.erb'
-        copy_file 'nginx.conf.erb'
-        template  'routes.rb'
-        copy_file 'schedule.rb'
-        template  'secrets.yml'
-      end
-    end
-
-    def database_yml
-    end
-
-    def db
-    end
-
-    def lib
-      directory 'lib'
-      empty_directory_with_keep_file 'lib/assets'
-    end
-
-    def public_directory
-      directory 'public'
-    end
-
-    def vendor
-      directory 'vendor/assets'
-    end
-
     def leftovers
       template '.ruby-version'
-      copy_file 'Capfile'
-      copy_file 'Guardfile'
+      copy_file 'Guardfile' unless options.api?
+      copy_file 'provision'
       template  'Vagrantfile'
 
       after_bundle do
-        db_directory
+        update_manifest if options.update_manifest?
+        check_manifest!
 
-        run 'bundle exec rake db:drop' if options.drop?
-        run 'bundle exec rake db:create'
-        configure_devise
-        run 'bundle exec rake db:migrate' #TODO: Multiple migrations have the name CreateRichRichImages
-        run 'bundle exec rake db:seed'
-        run 'bundle exec rake db:data:dump'
+        configure_assets unless options.api?
+        configure_mailers
+        configure_models unless options.api?
+        configure_views unless options.api?
+        configure_backup
+        configure_deploy
+        configure_environments
+        configure_initializers unless options.api?
+        configure_locales
+        configure_sunzi
+        configure_application
+        configure_boot
+        configure_database_yml if options[:database] == 'postgresql'
+        configure_routes
+        configure_schedule
+        configure_secrets_yml
+        configure_settings_yml
+        configure_migrate unless options.api?
+        configure_tasks
+        configure_spec
 
         unless options.skip_git?
           git :init
@@ -121,141 +56,109 @@ module Appizer
 
     private
 
-    def db_directory
-      copy_file 'db/seeds.rb'
-      run 'bundle exec rake railties:install:migrations'
-      copy_file 'db/migrate/001_add_mail_interceptors_to_settings.rb',
-        "db/migrate/#{next_timestamp}_add_mail_interceptors_to_settings.rb"
-      copy_file 'db/migrate/002_devise_create_users.rb',
-        "db/migrate/#{next_timestamp}_devise_create_users.rb"
+    def configure_assets
+      directory   'app_tt/assets', 'app/assets'
+      remove_file 'app/assets/javascripts/application.js'
+      remove_file 'app/assets/javascripts/cable.js'
+      remove_file 'app/assets/stylesheets/application.css'
+      directory   'public_tt', 'public'
+      directory   'vendor_tt', 'vendor'
+      remove_file 'vendor/assets/javascripts/.keep'
+      remove_file 'vendor/assets/stylesheets/.keep'
     end
 
-    def next_timestamp
-      return @next_timestamp + 1 if @next_timestamp
+    def configure_mailers
+      directory 'app_tt/mailers', 'app/mailers'
+    end
 
-      Dir['db/migrate/*.rb'].sort.last =~ /(\d{14})_/
-      @next_timestamp = $1.to_i + 1
+    def configure_models
+      directory 'app_tt/models', 'app/models'
+    end
+
+    def configure_views
+      directory   'app_tt/views', 'app/views'
+      remove_file 'app/views/layouts/application.html.erb'
+    end
+
+    def configure_backup
+      invoke 'runnee:install'
+    end
+
+    def configure_deploy
+      copy_file 'Capfile'
+      template  'config_tt/deploy.rb', 'config/deploy.rb'
+      directory 'config_tt/deploy', 'config/deploy'
+      invoke    'capi_recipes:install'
+    end
+
+    def configure_environments
+      template  'config_tt/environments/development.rb', 'config/environments/development.rb'
+      template  'config_tt/environments/production.rb', 'config/environments/production.rb'
+      template  'config_tt/environments/production.rb', 'config/environments/staging.rb'
+      gsub_file 'config/environments/staging.rb', "#{app_dashed_name}.com", "test.#{app_dashed_name}.com"
+      template  'config_tt/environments/production.rb', 'config/environments/vagrant.rb'
+      gsub_file 'config/environments/vagrant.rb', "#{app_dashed_name}.com", "#{app_dashed_name}.dev"
+    end
+
+    def configure_initializers
+      directory 'config_tt/initializers', 'config/initializers'
+    end
+
+    def configure_locales
+      copy_file 'config_tt/locales/en.yml', 'config/locales/en.yml'
+      other_locales_each do |locale|
+        duplicate_locale locale
+      end
+    end
+
+    def configure_sunzi
+      run 'bundle exec sun create'
     end
 
     def configure_application
-      insert_into_file 'application.rb', %{require "sprockets-derailleur"\n}, after: %{require "sprockets/railtie"\n}
-
-      application <<-APP.strip_heredoc.indent(4)
-
-        config.to_prepare do
-          # Load application's model / class decorators
-          Dir.glob(File.join(File.dirname(__FILE__), "../app/**/*_decorator*.rb")) do |c|
-            Rails.configuration.cache_classes ? require(c) : load(c)
-          end
-          Dir.glob(File.join(File.dirname(__FILE__), "../lib/**/*_decorator*.rb")) do |c|
-            Rails.configuration.cache_classes ? require(c) : load(c)
-          end
-        end
-
-        config.time_zone = 'Eastern Time (US & Canada)'
-
-        config.i18n.default_locale = :#{options.locales.first}
-        config.i18n.available_locales = #{options.locales.map(&:to_sym)}
-
-        # config.active_job.queue_adapter = :que
-        config.active_record.schema_format = :sql
-
-        config.action_view.embed_authenticity_token_in_remote_forms = true
-
-        config.assets.paths << Rails.root.join("app", "assets", "fonts")
-        config.assets.paths << Rails.root.join("vendor", "assets", "fonts")
-        config.assets.precompile += %w( .svg .eot .woff .ttf)
-      APP
+      template 'config_tt/application.rb', 'config/application.rb'
     end
 
-    def configure_development
-      insert_into_file 'development.rb', %{require_relative '../../lib/middleware/turbo_dev'\n\n},
-        before: %{Rails.application.configure do}
-
-      environment(<<-DEV.strip_heredoc.indent(2), env: 'development')
-
-        config.middleware.insert 0, Middleware::TurboDev
-        config.middleware.insert_after(ActionDispatch::Static, Rack::LiveReload) # guard -P livereload
-
-        config.action_controller.asset_host = 'http://localhost:3000'
-        config.action_mailer.asset_host = 'http://localhost:3000'
-        config.action_mailer.delivery_method = :letter_opener_web
-        config.action_mailer.default_url_options = { :host => "localhost:3000" }
-      DEV
-
-      gsub_file 'development.rb', 'config.assets.debug = true', 'config.assets.debug = false'
-      gsub_file 'development.rb', 'config.assets.digest = true', 'config.assets.digest = false'
+    def configure_boot
+      copy_file 'config_tt/boot.rb', 'config/boot.rb'
     end
 
-    def configure_production
-      configure_env 'production', 'error'
-      gsub_file 'production.rb', 'config.assets.js_compressor = :uglifier',
-        'config.assets.js_compressor = Uglifier.new(copyright: false)'
+    def configure_database_yml
+      template 'config_tt/databases/postgresql.yml', 'config/database.yml'
     end
 
-    def configure_staging
-      configure_env 'staging', 'info'
+    def configure_routes
+      template 'config_tt/routes.rb', 'config/routes.rb'
     end
 
-    def configure_vagrant
-      configure_env 'vagrant', 'info'
+    def configure_schedule
+      template 'config_tt/schedule.rb', 'config/schedule.rb'
     end
 
-    def configure_env(name, level)
-      environment(<<-CONFIG.strip_heredoc.indent(2), env: name)
-
-        hostname = todo.todo
-        config.action_controller.asset_host = "http://\#{hostname}"
-        config.action_mailer.asset_host = "http://\#{hostname}"
-        config.action_mailer.delivery_method = :smtp
-        config.action_mailer.smtp_settings = {
-          address:              'smtp.mandrillapp.com',
-          port:                 587,
-          domain:               hostname,
-          user_name:            'todo',
-          password:             'todo',
-          authentication:       'plain',
-          enable_starttls_auto: true,
-        }
-        config.action_mailer.default_url_options = { :host => hostname }
-      CONFIG
-      gsub_file "#{name}.rb", /# config.action_dispatch.+NGINX/,
-        "config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for NGINX"
-      gsub_file "#{name}.rb", 'config.log_level = :debug',
-        "config.log_level = :#{level}"
+    def configure_secrets_yml
+      template 'config_tt/secrets.yml', 'config/secrets.example.yml'
+      template 'config_tt/secrets.yml', 'config/secrets.yml'
     end
 
-    def configure_devise
-      invoke('devise:install', [], orm: :active_record)
-
-      { '# config.http_authenticatable = false'       => 'config.http_authenticatable = true',
-        'config.stretches = Rails.env.test? ? 1 : 10' => 'config.stretches = 20',
-        /# config.pepper = '.+'/                      => 'config.pepper = Rails.configuration.secret_token',
-        '# config.encryptor = :sha512'                => 'config.encryptor = :authlogic_sha512',
-        'config.sign_out_via = :delete'               => 'config.sign_out_via = :get'
-      }.each do |old, new|
-        gsub_file 'config/initializers/devise.rb', old, new
-      end
-
-      inside 'config/locales' do
-        copy_file 'devise.en.yml'
-        other_locales_each do |locale|
-          duplicate_locale locale, 'devise'
-        end
-      end
+    def configure_settings_yml
+      template 'config_tt/settings.yml', 'config/settings.yml'
     end
 
-    def duplicate_locale(locale, name = nil)
-      src_name = name ? "#{name}.en.yml" : "en.yml"
-      dst_name = name ? "#{name}.#{locale}.yml" : "#{locale}.yml"
-      copy_file src_name, dst_name
-      gsub_file dst_name, /^en/, locale
+    def configure_migrate
+      copy_file 'db_tt/migrate/001_devise_create_users.rb', "db/migrate/#{next_timestamp}_devise_create_users.rb"
     end
 
-    def other_locales_each
-      options.locales.reject{ |l| l == 'en' }.each do |locale|
-        yield locale
-      end
+    def configure_tasks
+      directory   'lib_tt', 'lib'
+      remove_file 'lib/tasks/.keep'
+    end
+
+    def configure_spec
+      invoke    'rspec:install'
+      copy_file 'spec_tt/rails_helper.rb', 'spec/rails_helper.rb'
+
+      run "bundle binstubs rspec-core"
+      insert_into_file 'bin/rspec', "\nrequire 'bootscale/setup'\n", after: "require 'bundler/setup'"
     end
   end
 end

@@ -1,0 +1,12 @@
+Rails.application.routes.draw do
+<% if options.api? -%>
+  match '/' => 'application#render_404', via: %w[ get post put patch delete options any ]
+
+<% else -%>
+  devise_for :users
+
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
+
+<% end -%>
+  mount Notified::Engine => '/'
+end

@@ -1,0 +1,41 @@
+# Be sure to restart your server when you modify this file.
+
+default: &default
+  backup_mail_from: noreply@<%= app_dashed_name %>.com
+  backup_mail_to: &admin_email admin@<%= app_dashed_name %>.com
+  backup_mail_address: 127.0.0.1
+  backup_mail_port: 1025
+  backup_mail_domain: 127.0.0.1:3000
+  backup_storage: local
+  monit_mail_to: *admin_email
+  monit_mail_address: 127.0.0.1
+  monit_mail_port: 1025
+
+development:
+  <<: *default
+
+test:
+  <<: *default
+
+vagrant:
+  <<: *default
+  backup_mail_domain: <%= app_dashed_name %>.dev
+  backup_storage: s3
+
+staging:
+  <<: *default
+  backup_mail_address: smtp.sendgrid.net
+  backup_mail_port: 587
+  backup_mail_domain: test.<%= app_dashed_name %>.com
+  backup_storage: s3
+  monit_mail_address: smtp.sendgrid.net
+  monit_mail_port: 587
+
+production:
+  <<: *default
+  backup_mail_address: smtp.sendgrid.net
+  backup_mail_port: 587
+  backup_mail_domain: <%= app_dashed_name %>.com
+  backup_storage: s3
+  monit_mail_address: smtp.sendgrid.net
+  monit_mail_port: 587

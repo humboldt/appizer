@@ -7,19 +7,27 @@
 # Ignore bundler config.
 /.bundle
 
+<% if sqlite3? -%>
 # Ignore the default SQLite database.
 /db/*.sqlite3
 /db/*.sqlite3-journal
-/db/data.dev.yml
 
-# Ignore secrets
-/config/secrets.yml
-/config/database.yml
-
+<% end -%>
 # Ignore all logfiles and tempfiles.
 /log/*
+/tmp/*
+<% if keeps? -%>
 !/log/.keep
-/tmp
+!/tmp/.keep
+<% end -%>
+
+# Ignore Byebug command history file.
+.byebug_history
+
+/config/secrets.yml
+/.vagrant/*
+/compiled/*
+/git_stats/*
 
 /public/assets/*
 /public/system/*
@@ -39,11 +47,6 @@
 # Default stuff
 .DS_Store
 .sass-cache
-
-tools/bower/vendor/*
-
-.vagrant/*
-/compiled
 
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio and Webstorm
 *.iml

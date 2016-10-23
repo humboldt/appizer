@@ -1,0 +1,69 @@
+RailsAdmin.config do |config|
+  config.main_app_name = ["<%= app_name.humanize %>", ""]
+
+  # config.browser_validations = true
+  # config.compact_show_view = true
+
+  ### Popular gems integration
+
+  ## == Devise ==
+  config.authenticate_with do
+    warden.authenticate! scope: :user
+  end
+  config.current_user_method(&:current_user)
+
+  ## == Cancan ==
+  # config.authorize_with :cancan
+
+  ## == Pundit ==
+  # config.authorize_with :pundit
+
+  ## == PaperTrail ==
+  # config.audit_with :paper_trail, 'User', 'PaperTrail::Version' # PaperTrail >= 3.0.0
+
+  ### More at https://github.com/sferik/rails_admin/wiki/Base-configuration
+
+  ## == Gravatar integration ==
+  ## To disable Gravatar integration in Navigation Bar set to false
+  config.show_gravatar = false
+
+  # max_number_of_columns = 8
+  # config.total_columns_width = 120*(max_number_of_columns - 1) + 1
+
+  # config.included_models = ['AnyModel']
+  # config.excluded_models = ['AnyModel']
+
+  config.actions do
+    dashboard do                  # mandatory
+      statistics false
+    end
+    index                         # mandatory
+    new do
+      except %w[
+        Setting
+      ]
+    end
+    export do
+      except %w[
+        Setting
+      ]
+    end
+    bulk_delete do
+      except %w[
+        Setting
+      ]
+    end
+    show
+    edit
+    delete do
+      except %w[
+        Setting
+      ]
+    end
+    show_in_app
+
+    ## With an audit adapter, you can add:
+    # history_index
+    # history_show
+  end
+end
