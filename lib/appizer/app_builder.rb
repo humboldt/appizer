@@ -46,8 +46,6 @@ module Appizer
           git :init
           git add: '.'
           git commit: "-m 'first commit'"
-          git checkout: "-b 'staging'"
-          git checkout: "-b 'vagrant'"
           git checkout: "-b 'develop'"
           git config: "http.sslVerify '#{options.git_ssl_verify}'"
         end
