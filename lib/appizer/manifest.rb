@@ -41,10 +41,10 @@ module Appizer
 
       def non_api_gems
         %w[
-        rails_admin
-        devise
-        guard-livereload
-      ]
+          rails_admin
+          devise
+          guard-livereload
+        ]
       end
 
       def manifest_files
