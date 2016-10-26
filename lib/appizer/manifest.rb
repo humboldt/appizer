@@ -2,6 +2,7 @@ module Appizer
   module Manifest
     extend ActiveSupport::Concern
 
+    # TODO keep version as well to be able to diff later
     def update_manifest
       File.open self.class.manifest_path, 'w' do |f|
         self.class.manifest_files.each do |gem, files|
@@ -43,6 +44,7 @@ module Appizer
         %w[
           rails_admin
           devise
+          pundit
           guard-livereload
         ]
       end
@@ -81,6 +83,10 @@ module Appizer
             'lib/generators/active_record/templates/migration.rb',
             'lib/generators/devise/devise_generator.rb',
             'lib/generators/devise/orm_helpers.rb',
+          ],
+          pundit: [
+            'lib/generators/pundit/install/templates/application_policy.rb.tt',
+            'lib/generators/pundit/install/templates/pundit.rb.tt',
           ],
           'rspec-rails': [
             'lib/generators/rspec/install/templates/spec/rails_helper.rb',

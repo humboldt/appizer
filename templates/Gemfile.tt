@@ -69,6 +69,9 @@ group :test do
   gem 'fantaskspec', '~> 1.0'
   gem 'shoulda-matchers', '~> 3.1'
   gem 'shoulda-callback-matchers', '~> 1.1'
+<%- unless options.api? -%>
+  gem 'pundit-matchers', '~> 1.1'
+<%- end -%>
   gem 'rails-controller-testing'
   gem 'spring-commands-rspec'
 end
@@ -89,6 +92,7 @@ gem 'bootscale', require: false
 <%- unless options.api? -%>
 gem 'rails_admin', github: 'patleb/rails_admin'
 gem 'rails_admin-i18n'
+gem 'rails_admin_pg'
 gem 'kaminari', github: 'patleb/kaminari', branch: '0-17-stable'
 gem 'dotiw'
 gem 'bootstrap-sass', '~> 3.3.6'
@@ -96,6 +100,7 @@ gem 'bootswatch-rails'
 gem 'devise'
 gem 'devise-encryptable'
 gem 'devise-bootstrap-views', github: 'patleb/devise-bootstrap-views'
+gem 'pundit', github: 'patleb/pundit'
 <%- end -%>
 
 gem 'set_things', '~> 0.9'

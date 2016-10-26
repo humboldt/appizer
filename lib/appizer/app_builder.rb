@@ -24,6 +24,7 @@ module Appizer
         configure_assets unless options.api?
         configure_mailers
         configure_models unless options.api?
+        configure_policies unless options.api?
         configure_views unless options.api?
         configure_backup
         configure_deploy
@@ -71,6 +72,10 @@ module Appizer
 
     def configure_models
       directory 'app_tt/models', 'app/models'
+    end
+
+    def configure_policies
+      directory 'app_tt/policies', 'app/policies'
     end
 
     def configure_views

@@ -8,10 +8,6 @@ module Admin::Setting
     scope :settings, -> { where.not(name: HIDDEN_SETTINGS) }
 
     rails_admin do
-      list do
-        scopes [:settings]
-      end
-
       edit do
         field :name do
           read_only true
@@ -21,7 +17,7 @@ module Admin::Setting
       end
 
       show do
-        configure :history, :text
+        configure :history, :pg_string_array
       end
 
       exclude_fields :created_at
