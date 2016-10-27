@@ -2,19 +2,25 @@ module Appizer
   module Manifest
     extend ActiveSupport::Concern
 
-    # TODO keep version as well to be able to diff later
     def update_manifest
       File.open self.class.manifest_path, 'w' do |f|
+        digests = []
+        versions = SortedSet.new
         self.class.manifest_files.each do |gem, files|
           files.each do |file|
-            f.puts Digest::MD5.file(gem_file_path(gem, file)).to_s
+            file_path = gem_file_path(gem, file)
+            digests << Digest::MD5.file(file_path).to_s
+            versions << file_path.sub(file, '').split('/').last
           end
+        end
+        (versions.to_a + digests).each do |line|
+          f.puts line
         end
       end
     end
 
     def check_manifest!
-      manifest = File.readlines(self.class.manifest_path).map(&:strip)
+      digests = File.readlines(self.class.manifest_path).map(&:strip)
       changes = self.class.manifest_files.each_with_object([]) do |(gem, files), changes|
         files.each do |file|
           begin
@@ -27,7 +33,7 @@ module Appizer
               raise e
             end
           end
-          unless manifest.include? digest
+          unless digests.include? digest
             changes << "#{gem}/#{file}"
           end
         end
