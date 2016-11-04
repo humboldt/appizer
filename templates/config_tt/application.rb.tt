@@ -64,6 +64,7 @@ module <%= app_const_base %>
       end
 <%- unless options[:api] -%>
 
+      # TODO modify obfuscator for RailsAdmin
       RailsAdmin::ApplicationController.class_eval do
         include Notified::Loggable
         include Notified::Rescuable
@@ -74,8 +75,9 @@ module <%= app_const_base %>
       end
 
       Dir[Rails.root.join('app', 'models', 'admin', '**', '*.rb')].each do |name|
-        model_name = File.basename(name).sub(/\.rb/, '').camelize
-        model_name.constantize.include "Admin::#{model_name}".constantize
+        model = name.match(/app\/models\/admin\/(.+)\.rb/)[1].camelize.constantize
+        model.include Admin
+        model.include "Admin::#{model.name}".constantize
       end
 <%- end -%>
     end
