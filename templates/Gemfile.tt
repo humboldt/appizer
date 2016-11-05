@@ -83,7 +83,6 @@ end
 <%- unless options.api? -%>
 # Use SCSS for stylesheets
 gem 'sassc-rails'
-# gem 'sprockets', '~> 3.6.3'
 gem 'autoprefixer-rails'
 <%- end -%>
 
