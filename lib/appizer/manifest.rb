@@ -60,6 +60,7 @@ module Appizer
           railties: [
             'lib/rails/generators/rails/app/templates/gitignore',
             'lib/rails/generators/rails/app/templates/Gemfile',
+            'lib/rails/generators/rails/app/templates/Rakefile',
             'lib/rails/generators/rails/app/templates/README.md',
             'lib/rails/generators/rails/app/templates/app/assets/javascripts/application.js.tt',
             'lib/rails/generators/rails/app/templates/app/assets/javascripts/cable.js',
@@ -93,12 +94,22 @@ module Appizer
           pundit: [
             'lib/generators/pundit/install/templates/application_policy.rb.tt',
             'lib/generators/pundit/install/templates/pundit.rb.tt',
+            'lib/generators/pundit/install/install_generator.rb',
+          ],
+          scatter_swapper: [
+            'lib/scatter_swapper/configuration.rb'
           ],
           'rspec-rails': [
             'lib/generators/rspec/install/templates/spec/rails_helper.rb',
           ],
           'guard-livereload': [
             'lib/guard/livereload/templates/Guardfile',
+          ],
+          notified: [
+            'lib/notified/configuration.rb'
+          ],
+          ext_rails: [
+            'lib/ext_rails/configuration.rb'
           ],
           runnee: [
             'lib/generators/runnee/install/templates/config/Backup/models/model_example.rb',

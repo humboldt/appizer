@@ -56,10 +56,7 @@ module <%= app_const_base %>
 
     config.to_prepare do
       # Load application's model / class decorators
-      Dir.glob(File.join(File.dirname(__FILE__), "../app/**/*_decorator*.rb")) do |c|
-        Rails.configuration.cache_classes ? require(c) : load(c)
-      end
-      Dir.glob(File.join(File.dirname(__FILE__), "../lib/**/*_decorator*.rb")) do |c|
+      Dir[Rails.root.join("{app,lib}/**/*_decorator.rb")].each do |c|
         Rails.configuration.cache_classes ? require(c) : load(c)
       end
 <%- unless options[:api] -%>
@@ -74,7 +71,7 @@ module <%= app_const_base %>
         end
       end
 
-      Dir[Rails.root.join('app', 'models', 'admin', '**', '*.rb')].each do |name|
+      Dir[Rails.root.join('app/models/admin/**/*.rb')].each do |name|
         model = name.match(/app\/models\/admin\/(.+)\.rb/)[1].camelize.constantize
         model.include Admin
         model.include "Admin::#{model.name}".constantize

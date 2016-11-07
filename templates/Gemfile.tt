@@ -1,5 +1,10 @@
 source 'https://rubygems.org'
 
+git_source(:github) do |repo_name|
+  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
+  "https://github.com/#{repo_name}.git"
+end
+
 <% gemfile_entries.each do |gem| -%>
 <% if gem.comment -%>
 
@@ -43,6 +48,9 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
 <% end -%>
 
+  gem 'brakeman', require: false
+  gem 'bundler-audit', require: false
+
   gem 'sunzistrano', '~> 1.6'
   gem 'capistrano', '~> 3.6'
   gem 'capistrano-rbenv', '~> 2.0'
@@ -55,6 +63,7 @@ group :development do
   gem 'xray-rails', '~> 0.2'
   gem 'active_record_query_trace'
   gem 'query_diet'
+  gem 'i18n-debug'
 
   gem 'guard', '>= 2.2.2', require: false
   gem 'guard-livereload',  require: false
@@ -90,6 +99,7 @@ gem 'bootscale', require: false
 
 <%- unless options.api? -%>
 gem 'rails_admin', github: 'patleb/rails_admin'
+gem 'rails-i18n', '~> 5.0.0'
 gem 'rails_admin-i18n'
 gem 'rails_admin_pg'
 gem 'kaminari', github: 'patleb/kaminari', branch: '0-17-stable'
@@ -100,7 +110,7 @@ gem 'devise-bootstrap-views', github: 'patleb/devise-bootstrap-views'
 gem 'pundit', github: 'patleb/pundit'
 <%- end -%>
 
-gem 'set_things', '~> 0.9'
+gem 'set_things', '~> 0.10'
 gem 'runnee', '~> 0.2'
 gem 'whenever', '~> 0.9', require: false
 
@@ -112,6 +122,10 @@ gem 'recursive-open-struct', '~> 1.0'
 gem 'ext_ruby', '~> 0.1'
 gem 'ext_rails', '~> 0.2'
 gem 'active_type', '~> 0.6'
+gem 'pluck_to_hash', '~> 1.0'
+<% unless options[:database] == 'postgresql' -%>
+gem 'pg_types', '~> 0.1'
+<% end -%>
 
 gem 'notified', '~> 0.8'
 gem 'staging_interceptor', '~> 0.2'
@@ -119,3 +133,4 @@ gem 'sendgrid-actionmailer', '~> 0.2'
 
 gem 'acts_as_paranoid', github: 'trcarden/acts_as_paranoid'
 gem 'activerecord-import', '~> 0.16'
+gem 'strong_migrations'

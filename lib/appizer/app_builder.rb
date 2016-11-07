@@ -29,7 +29,7 @@ module Appizer
         configure_backup
         configure_deploy
         configure_environments
-        configure_initializers unless options.api?
+        configure_initializers
         configure_locales
         configure_sunzi
         configure_application
@@ -101,10 +101,20 @@ module Appizer
       gsub_file 'config/environments/staging.rb', "#{app_dashed_name}.com", "test.#{app_dashed_name}.com"
       template  'config_tt/environments/production.rb', 'config/environments/vagrant.rb'
       gsub_file 'config/environments/vagrant.rb', "#{app_dashed_name}.com", "#{app_dashed_name}.dev"
+      insert_into_file 'config/environments/test.rb', <<-END.strip_heredoc.indent(2), before: /^end/
+
+        config.logger = ActiveSupport::Logger.new(config.paths['log'].first, 1, 5*1024*1024) # 5Mb
+      END
     end
 
     def configure_initializers
-      directory 'config_tt/initializers', 'config/initializers'
+      if options.api?
+        copy_file 'config_tt/initializers/ext_rails.rb', 'config/initializers/ext_rails.rb'
+        copy_file 'config_tt/initializers/notified.rb', 'config/initializers/notified.rb'
+        copy_file 'config_tt/initializers/strong_migrations.rb', 'config/initializers/strong_migrations.rb'
+      else
+        directory 'config_tt/initializers', 'config/initializers'
+      end
     end
 
     def configure_locales

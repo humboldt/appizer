@@ -31,13 +31,15 @@ Rails.application.configure do
 
     config.cache_store = :null_store
   end
+
+  routes.default_url_options = { host: '127.0.0.1:3000' }
   <%- unless options.skip_action_mailer? -%>
 
   # Don't care if the mailer can't send.
   # config.action_mailer.raise_delivery_errors = false
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = { address: "127.0.0.1", port: 1025 }
-  config.action_mailer.default_url_options = { :host => '127.0.0.1:3000' }
+  config.action_mailer.default_url_options = routes.default_url_options
 
   config.action_mailer.perform_caching = false
   <%- end -%>
@@ -61,7 +63,9 @@ Rails.application.configure do
   config.assets.digest = false
 
   config.action_controller.asset_host = "http://localhost:3000"
+  <%- unless options.skip_action_mailer? -%>
   config.action_mailer.asset_host = config.action_controller.asset_host
+  <%- end -%>
 
   # Suppress logger output for asset requests.
   config.assets.quiet = true
@@ -73,8 +77,20 @@ Rails.application.configure do
   # Use an evented file watcher to asynchronously detect changes in source code,
   # routes, locales, etc. This feature depends on the listen gem.
   <%= '# ' unless depend_on_listen? %>config.file_watcher = ActiveSupport::EventedFileUpdateChecker
+
+  config.logger = ActiveSupport::Logger.new(config.paths['log'].first, 1, 5*1024*1024) # 5Mb
 end
 
 ActiveRecordQueryTrace.enabled = false
 ActiveRecordQueryTrace.level = :full
 ActiveRecordQueryTrace.lines = 0
+
+class NullLoger < Logger
+  def initialize(*args)
+  end
+
+  def add(*args, &block)
+  end
+end
+
+I18n::Debug.logger = NullLoger.new
