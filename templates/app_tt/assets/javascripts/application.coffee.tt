@@ -10,7 +10,6 @@
 # Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 # about supported directives.
 #
-#= require xray_dev
 <% unless options[:skip_javascript] -%>
 #= require <%= options[:javascript] %>2
 #= require <%= options[:javascript] %>_ujs
@@ -19,3 +18,4 @@
 <% end -%>
 <% end -%>
 #= require bootstrap-sprockets
+#= require xray_dev
