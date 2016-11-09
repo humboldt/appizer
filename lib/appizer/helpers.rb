@@ -12,8 +12,8 @@ module Appizer
 
     def gem_file_path(gem, file)
       in_root do
-        gem_root = `bundle show #{gem}`.strip
-        file = File.join(gem_root, file)
+        spec = Bundler.load.specs.find{ |s| s.name == gem.to_s }
+        file = File.join(spec.full_gem_path, file)
       end
       file
     end
