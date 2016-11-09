@@ -101,10 +101,7 @@ module Appizer
       gsub_file 'config/environments/staging.rb', "#{app_dashed_name}.com", "test.#{app_dashed_name}.com"
       template  'config_tt/environments/production.rb', 'config/environments/vagrant.rb'
       gsub_file 'config/environments/vagrant.rb', "#{app_dashed_name}.com", "#{app_dashed_name}.dev"
-      insert_into_file 'config/environments/test.rb', <<-END.strip_heredoc.indent(2), before: /^end/
-
-        config.logger = ActiveSupport::Logger.new(config.paths['log'].first, 1, 5*1024*1024) # 5Mb
-      END
+      template  'config_tt/environments/test.rb', 'config/environments/test.rb'
     end
 
     def configure_initializers

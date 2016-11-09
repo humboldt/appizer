@@ -70,6 +70,7 @@ module Appizer
             'lib/rails/generators/rails/app/templates/config/databases/postgresql.yml',
             'lib/rails/generators/rails/app/templates/config/environments/development.rb.tt',
             'lib/rails/generators/rails/app/templates/config/environments/production.rb.tt',
+            'lib/rails/generators/rails/app/templates/config/environments/test.rb.tt',
             'lib/rails/generators/rails/app/templates/config/application.rb',
             'lib/rails/generators/rails/app/templates/config/boot.rb',
             'lib/rails/generators/rails/app/templates/config/routes.rb',
