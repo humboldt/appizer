@@ -60,7 +60,7 @@ group :development do
   gem 'capi_recipes', '~> 0.7'
 <%- unless options.api? -%>
 
-  gem 'xray-rails', '~> 0.2'
+  gem 'xray-rails', github: 'patleb/xray-rails'
   gem 'active_record_query_trace'
   gem 'query_diet'
   gem 'i18n-debug'
@@ -108,6 +108,7 @@ gem 'devise'
 gem 'devise-encryptable'
 gem 'devise-bootstrap-views', github: 'patleb/devise-bootstrap-views'
 gem 'pundit', github: 'patleb/pundit'
+# TODO gem 'secure_headers', '~> 3.5'
 <%- end -%>
 
 gem 'set_things', '~> 0.10'
@@ -117,12 +118,10 @@ gem 'whenever', '~> 0.9', require: false
 gem 'scatter_swapper', '~> 0.3'
 gem 'schema_validator', '~> 0.1'
 gem 'recursive-open-struct', '~> 1.0'
-# TODO gem 'secure_headers', '~> 3.5'
 
 gem 'ext_ruby', '~> 0.1'
 gem 'ext_rails', '~> 0.2'
 gem 'active_type', '~> 0.6'
-gem 'pluck_to_hash', '~> 1.0'
 <% unless options[:database] == 'postgresql' -%>
 gem 'pg_types', '~> 0.1'
 <% end -%>
@@ -133,4 +132,4 @@ gem 'sendgrid-actionmailer', '~> 0.2'
 
 gem 'acts_as_paranoid', github: 'trcarden/acts_as_paranoid'
 gem 'activerecord-import', '~> 0.16'
-gem 'strong_migrations'
+gem 'strong_migrations', '~> 0.1'
