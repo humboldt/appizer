@@ -5,7 +5,7 @@ module Admin::Setting
     HIDDEN_SETTINGS = %i[
     ].freeze
 
-    scope :settings, -> { where.not(name: HIDDEN_SETTINGS) }
+    scope :visible, -> { where.not(name: HIDDEN_SETTINGS) }
 
     rails_admin do
       edit do
