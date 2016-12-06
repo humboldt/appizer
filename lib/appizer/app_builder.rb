@@ -164,8 +164,8 @@ module Appizer
     end
 
     def configure_spec
-      invoke    'rspec:install'
-      copy_file 'spec_tt/rails_helper.rb', 'spec/rails_helper.rb'
+      invoke   'rspec:install'
+      template 'spec_tt/rails_helper.rb', 'spec/rails_helper.rb'
 
       run "bundle binstubs rspec-core"
       insert_into_file 'bin/rspec', "\nrequire 'bootscale/setup'\n", after: "require 'bundler/setup'"
